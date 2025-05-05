@@ -6,6 +6,8 @@ import (
 )
 
 func main() {
+	clear() // Clear console
+
 	var input string
 
 	// loop
@@ -38,6 +40,8 @@ func main() {
 		case 8:
 			showAllData()
 		case 9:
+			clear() // Clear console
+		case 10:
 			fmt.Println("Keluar dari program!")
 			return // break loop
 		default:
