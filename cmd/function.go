@@ -2,8 +2,7 @@ package main
 
 import "fmt"
 
-// showMenu function for showing menu
-func showMenu() {
+func showMenu() { // showMenu function for showing menu
 	fmt.Println("======================================================")
 	fmt.Println("||   SELAMAT DATANG DI APLIKASI DAUR ULANG SAMPAH   ||")
 	fmt.Println("======================================================")
@@ -69,7 +68,44 @@ func updateData() {
 }
 
 func deleteData() {
-	// TODO:
+	clear() // Clear console
+
+	var (
+		data  Sampah
+		index int
+	)
+
+	fmt.Println() // Spacing
+
+	if len(DataSampah) == 0 { // Panjang DataSampah == 0
+		fmt.Println("Tidak ada data yang tersedia untuk dihapus.")
+		fmt.Println() // Spacing
+		return
+	}
+
+	fmt.Println("Daftar Data Sampah:")
+	for i := 0; i < len(DataSampah); i++ { // i kurang dari panjang DataSampah -> i++
+		data = DataSampah[i]
+		fmt.Printf("%d. Kategori: %s, Jumlah: %d, Metode: %s, Lokasi: %s, Status: %s\n", i+1, data.Kategori, data.Jumlah, data.MetodeDaurUlang, data.Lokasi, data.Status) // Tampilkan data yang tersedia
+	}
+
+	fmt.Println() // Spacing
+
+	fmt.Print("Masukkan nomor data yang ingin dihapus: ")
+	fmt.Scan(&index)
+
+	index-- // Ubah ke index array (mulai dari 0)
+
+	if index < 0 || index >= len(DataSampah) {
+		fmt.Println("Nomor data tidak valid.")
+		fmt.Println() // Spacing
+		return
+	}
+
+	DataSampah = append(DataSampah[:index], DataSampah[index+1:]...) // Hapus data dengan menggeser elemen setelahnya
+	fmt.Println("Data berhasil dihapus.")
+
+	fmt.Println() // Spacing
 }
 
 func recordProcess() {
@@ -91,6 +127,8 @@ func showStatistics() {
 func showAllData() {
 	clear() // Clear console
 
+	var data Sampah
+
 	if len(DataSampah) == 0 { // Panjang DataSampah == 0
 		fmt.Println("Belum ada data sampah yang tersedia.")
 		fmt.Println() // Spacing
@@ -102,8 +140,8 @@ func showAllData() {
 	fmt.Println("========================================================================================")
 	fmt.Printf("|| %-3s || %-15s || %-6s || %-20s || %-10s || %-8s ||\n", "No", "Kategori", "Jumlah", "Metode Daur Ulang", "Lokasi", "Status")
 	fmt.Println("========================================================================================")
-	for i := 0; i < len(DataSampah); i++ {
-		data := DataSampah[i]
+	for i := 0; i < len(DataSampah); i++ { // i kurang dari panjang DataSampah -> i++
+		data = DataSampah[i]
 		fmt.Printf("|| %-3d || %-15s || %-6d || %-20s || %-10s || %-8s ||\n", i+1, data.Kategori, data.Jumlah, data.MetodeDaurUlang, data.Lokasi, data.Status)
 	}
 	fmt.Println("========================================================================================")
