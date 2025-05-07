@@ -6,46 +6,61 @@ import (
 )
 
 func main() {
-	clear() // Clear console
+	clearConsole() // Clear console
+	// loadingScreen() // Loading screen :)
 
-	var input string
+	var input, isGui string
 
-	// loop
-	for {
-		showMenu()
+	fmt.Print("Tekan y untuk menggunakan GUI dan n untuk CLI: ")
+	fmt.Scan(&isGui)
 
-		fmt.Scan(&input)
-		value, err := validation.ValidateInput(input)
+	if strToLower(isGui) == "y" {
+		// TODO:
+		fmt.Println("GUI masih kosong maseh!")
 
-		if err != nil {
-			fmt.Println("Error:", err)
-			return
+		return
+	} else if strToLower(isGui) == "n" {
+		clearConsole() // Clear console
+
+		// Loop
+		for {
+			showMenu()
+
+			fmt.Scan(&input)
+			value, err := validation.ValidateInput(input)
+
+			if err != nil {
+				fmt.Println("Error:", err)
+				return
+			}
+
+			switch value {
+			case 1:
+				addData()
+			case 2:
+				updateData()
+			case 3:
+				deleteData()
+			case 4:
+				recordProcess()
+			case 5:
+				searchData()
+			case 6:
+				sortData()
+			case 7:
+				showStatistics()
+			case 8:
+				showAllData()
+			case 9:
+				clearConsole() // Clear console
+			case 10:
+				fmt.Println("Keluar dari program!")
+				return // Break loop
+			default:
+				fmt.Println("Pilihan tidak valid, coba lagi.")
+			}
 		}
-
-		switch value {
-		case 1:
-			addData()
-		case 2:
-			updateData()
-		case 3:
-			deleteData()
-		case 4:
-			recordProcess()
-		case 5:
-			searchData()
-		case 6:
-			sortData()
-		case 7:
-			showStatistics()
-		case 8:
-			showAllData()
-		case 9:
-			clear() // Clear console
-		case 10:
-			fmt.Println("Keluar dari program!")
-			return // break loop
-		default:
-			fmt.Println("Pilihan tidak valid, coba lagi.")
-		}
+	} else {
+		fmt.Println("Input tidak valid!")
 	}
 }
