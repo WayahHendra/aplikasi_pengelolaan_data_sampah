@@ -2,8 +2,8 @@ package main
 
 type Sampah struct {
 	Kategori        string
-	Jumlah          int
 	MetodeDaurUlang string
+	Jumlah          int
 	Lokasi          string
 	Status          string
 }
