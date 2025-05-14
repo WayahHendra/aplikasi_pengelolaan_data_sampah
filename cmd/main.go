@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	clearConsole() // Clear console
+	clearConsole()
 	// loadingScreen() // Loading screen :)
 
 	var input, isGui string
@@ -20,11 +20,11 @@ func main() {
 
 		return
 	} else if strToLower(isGui) == "n" {
-		clearConsole() // Clear console
+		clearConsole()
 
 		// Loop
 		for {
-			showMenu()
+			showTableMenu()
 
 			fmt.Scan(&input)
 			value, err := validation.ValidateInput(input)
@@ -38,21 +38,21 @@ func main() {
 			case 1:
 				addData()
 			case 2:
-				updateData()
+				showAllData()
 			case 3:
-				deleteData()
+				updateData()
 			case 4:
-				recordProcess()
+				deleteData()
 			case 5:
 				searchData()
 			case 6:
 				sortData()
 			case 7:
-				showStatistics()
+				recordProcess()
 			case 8:
-				showAllData()
+				showStatistics()
 			case 9:
-				clearConsole() // Clear console
+				clearConsole()
 			case 10:
 				fmt.Println("Keluar dari program!")
 				return // Break loop

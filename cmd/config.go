@@ -2,38 +2,39 @@ package main
 
 import "fmt"
 
-type Sampah struct {
-	Jenis           string
-	MetodeDaurUlang string
-	Jumlah          int
-	Lokasi          string
+type Waste struct { // Struktur data sampah
+	WasteType       string
+	RecyclingMethod string
+	Quantity        int
+	Location        string
 	Status          string
 }
 
 var (
-	DataSampah []Sampah
-	version    string = "v0.6"
+	WasteData       []Waste          // Untuk menyimpan input data ke dalam array
+	TriggerShowData bool    = true   // Enable dan disable -> pressToContinue() dan clearConsole() pada fungsi showAllData()
+	Version         string  = "v0.7" // Versi aplikasi
 )
 
-func showMenu() { // showMenu function untuk memunculkan menu
+func showTableMenu() { // showMenu function untuk memunculkan menu
 	fmt.Println("===========================================================")
-	fmt.Println("||   SELAMAT DATANG DI APLIKASI DAUR ULANG SAMPAH", version, "  ||")
+	fmt.Println("||   SELAMAT DATANG DI APLIKASI DAUR ULANG SAMPAH", Version, "  ||")
 	fmt.Println("||=======================================================||")
-	fmt.Println("||  1. Tambah data sampah                                ||")
-	fmt.Println("||  2. Ubah data sampah                                  ||")
-	fmt.Println("||  3. Hapus data sampah                                 ||")
-	fmt.Println("||  4. Catat proses daur ulang                           ||")
+	fmt.Println("||  1. Tambah data sampah              C                 ||")
+	fmt.Println("||  2. Tampilkan semua data            R                 ||")
+	fmt.Println("||  3. Ubah data sampah                U                 ||")
+	fmt.Println("||  4. Hapus data sampah               D                 ||")
 	fmt.Println("||  5. Cari data sampah                                  ||")
 	fmt.Println("||  6. Urutkan data sampah                               ||")
-	fmt.Println("||  7. Tampilkan statistik                               ||")
-	fmt.Println("||  8. Tampilkan semua data                              ||")
+	fmt.Println("||  7. Catat proses daur ulang                           ||")
+	fmt.Println("||  8. Tampilkan statistik                               ||")
 	fmt.Println("||  9. Clear Console                                     ||")
 	fmt.Println("||  10. Keluar program                                   ||")
 	fmt.Println("===========================================================")
 	fmt.Print("Pilih menu (1-10): ")
 }
 
-func showTypes() { // showTypes function untuk memunculkan jenis sampah
+func showRecycleTypeTable() { // showRecycleTypeTable fungsi untuk menampilkan tabel jenis-jenis sampah daur ulang
 	fmt.Println("=============================================================================================================================")
 	fmt.Printf("|| %-20s || %-25s || %-66s ||\n", "Jenis Sampah", "Metode Daur Ulang", "Deskripsi Singkat")
 	fmt.Println("||=========================================================================================================================||")
