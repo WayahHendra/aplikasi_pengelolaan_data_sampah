@@ -65,11 +65,15 @@ func showAllData() {
 	if len(WasteData) == 0 { // Panjang DataSampah == 0
 		fmt.Println("Belum ada data sampah yang tersedia.")
 		fmt.Println() // Spacing
+
+		pressToContinue()
+		clearConsole()
+
 		return
 	}
 
 	fmt.Println("========================================================================================")
-	fmt.Printf("|| %-3s || %-15s|| %-20s || %-6s  || %-10s || %-8s ||\n", "No", "jenis", "Metode Daur Ulang", "Jumlah", "Lokasi", "Status")
+	fmt.Printf("|| %-3s || %-15s || %-20s || %-6s || %-10s || %-8s ||\n", "No", "Jenis", "Metode Daur Ulang", "Jumlah", "Lokasi", "Status")
 	fmt.Println("||====================================================================================||")
 	for i := 0; i < len(WasteData); i++ { // Loop data
 		data = WasteData[i]
@@ -100,6 +104,10 @@ func updateData() {
 	TriggerShowData = false
 	showAllData() // Memunculkan tabel data
 	TriggerShowData = true
+
+	if len(WasteData) == 0 { // Panjang DataSampah == 0
+		return
+	}
 
 	fmt.Print("Masukkan nomor data yang ingin diubah: ")
 	fmt.Scan(&index)
@@ -174,6 +182,10 @@ func deleteData() {
 	if len(WasteData) == 0 { // Panjang DataSampah == 0
 		fmt.Println("Tidak ada data yang tersedia untuk dihapus.")
 		fmt.Println() // Spacing
+
+		pressToContinue()
+		clearConsole()
+
 		return
 	}
 
@@ -209,8 +221,10 @@ func deleteData() {
 		clearConsole()
 
 		fmt.Println("Data berhasil dihapus.")
-	} else {
+	} else if strToLower(confirmDelete) == "n" {
 		fmt.Println("Gagal menghapus data.")
+	} else {
+		fmt.Println("Input tidak valid!")
 	}
 
 	fmt.Println() // Spacing

@@ -52,12 +52,15 @@ func main() {
 			case 8:
 				showStatistics()
 			case 9:
-				clearConsole()
-			case 10:
 				fmt.Println("Keluar dari program!")
 				return // Break loop
 			default:
 				fmt.Println("Pilihan tidak valid, coba lagi.")
+
+				fmt.Println() // Spacing
+
+				pressToContinue()
+				clearConsole()
 			}
 		}
 	} else {
