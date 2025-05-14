@@ -1,10 +1,21 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
 	"os"
 	"os/exec"
 	"runtime"
+	"strings"
+	"time"
 )
+
+func pressToContinue() {
+	reader := bufio.NewReader(os.Stdin)
+	reader.ReadString('\n')
+	fmt.Println("Press ENTER to continue...")
+	bufio.NewReader(os.Stdin).ReadString('\n')
+}
 
 func clearConsole() {
 	var cmd *exec.Cmd
@@ -37,7 +48,7 @@ func strToUpper(s string) string {
 	return string(runes) // Ubah kembali ke string
 }
 
-/* func loadingScreen() { // Source from https://go.dev/play/
+func loadingScreen() { // Source from https://go.dev/play/
 	const col = 30
 	bar := fmt.Sprintf("Loading! [%%-%vs]", col)
 	for i := 0; i < col; i++ {
@@ -47,4 +58,4 @@ func strToUpper(s string) string {
 	}
 	fmt.Printf(bar+" Done!", strings.Repeat("=", col))
 	fmt.Println()
-} */
+}

@@ -3,33 +3,33 @@ package main
 import "fmt"
 
 func addData() {
-	clearConsole() // Clear console
+	clearConsole()
 
 	var (
-		jenis           string
-		metodeDaurUlang string
-		jumlah          int
-		lokasi          string
+		wasteType       string
+		recyclingMethod string
+		quantity        int
+		location        string
 		status          string
 	)
 
-	showTypes() // Memunculkan jenis sampah
+	showRecycleTypeTable() // Memunculkan jenis-jenis sampah daur ulang
 
 	fmt.Println() // Spacing
 
 	fmt.Print("Masukkan jenis sampah: ")
-	fmt.Scan(&jenis)
-	jenis = garbageTypes(jenis) // Update data
+	fmt.Scan(&wasteType)
+	wasteType = garbageTypes(wasteType) // Update data
 
 	fmt.Print("Masukkan metode daur ulang sampah: ")
-	fmt.Scan(&metodeDaurUlang)
-	metodeDaurUlang = recyclingMethods(metodeDaurUlang, jenis) // Update data
+	fmt.Scan(&recyclingMethod)
+	recyclingMethod = recyclingMethods(recyclingMethod, wasteType) // Update data
 
 	fmt.Print("Masukkan jumlah sampah: ")
-	fmt.Scan(&jumlah)
+	fmt.Scan(&quantity)
 
 	fmt.Print("Masukkan lokasi pengumpulan: ")
-	fmt.Scan(&lokasi)
+	fmt.Scan(&location)
 
 	fmt.Print("Masukkan status daur ulang (y/n): ")
 	fmt.Scan(&status)
@@ -41,63 +41,101 @@ func addData() {
 		status = "nil"
 	}
 
-	DataSampah = append(DataSampah, Sampah{ // Menambahkan data baru ke dalam DataSampah
-		Jenis:           jenis,
-		MetodeDaurUlang: metodeDaurUlang,
-		Jumlah:          jumlah,
-		Lokasi:          lokasi,
+	WasteData = append(WasteData, Waste{ // Menambahkan data baru ke dalam DataSampah
+		WasteType:       wasteType,
+		RecyclingMethod: recyclingMethod,
+		Quantity:        quantity,
+		Location:        location,
 		Status:          status,
 	})
 
 	fmt.Println("Data berhasil ditambahkan.")
 
 	fmt.Println() // Spacing
+
+	pressToContinue()
+	clearConsole()
+}
+
+func showAllData() {
+	clearConsole()
+
+	var data Waste
+
+	if len(WasteData) == 0 { // Panjang DataSampah == 0
+		fmt.Println("Belum ada data sampah yang tersedia.")
+		fmt.Println() // Spacing
+		return
+	}
+
+	fmt.Println("========================================================================================")
+	fmt.Printf("|| %-3s || %-15s|| %-20s || %-6s  || %-10s || %-8s ||\n", "No", "jenis", "Metode Daur Ulang", "Jumlah", "Lokasi", "Status")
+	fmt.Println("||====================================================================================||")
+	for i := 0; i < len(WasteData); i++ { // Loop data
+		data = WasteData[i]
+		fmt.Printf("|| %-3d || %-15s || %-20s || %-6d || %-10s || %-8s ||\n", i+1, data.WasteType, data.RecyclingMethod, data.Quantity, data.Location, data.Status)
+	}
+	fmt.Println("========================================================================================")
+
+	fmt.Println() // Spacing
+
+	if TriggerShowData {
+		pressToContinue()
+		clearConsole()
+	}
 }
 
 func updateData() {
-	clearConsole() // Clear console
+	clearConsole()
 
 	var (
 		index           int
-		jenis           string
-		metodeDaurUlang string
-		jumlah          int
-		lokasi          string
+		wasteType       string
+		recyclingMethod string
+		quantity        int
+		location        string
 		status          string
 	)
 
+	TriggerShowData = false
 	showAllData() // Memunculkan tabel data
+	TriggerShowData = true
 
 	fmt.Print("Masukkan nomor data yang ingin diubah: ")
 	fmt.Scan(&index)
 
 	index-- // Ubah ke index array (mulai dari 0)
 
-	if index < 0 || index >= len(DataSampah) { // Input < 0 / input >= panjang DataSampah
+	if index < 0 || index >= len(WasteData) { // Input < 0 / input >= panjang DataSampah
 		fmt.Println("Nomor data tidak valid.")
+
 		fmt.Println() // Spacing
+
+		pressToContinue()
+		clearConsole()
+
 		return
 	}
 
-	clearConsole() // Clear console
+	clearConsole()
 
-	showTypes() // Memunculkan jenis sampah
+	showRecycleTypeTable() // Memunculkan jenis-jenis sampah daur ulang
 
 	fmt.Println() // Spacing
 
 	fmt.Print("Masukkan jenis sampah: ")
-	fmt.Scan(&jenis)
-	jenis = garbageTypes(jenis) // Update data
+	fmt.Scan(&wasteType)
+	wasteType = garbageTypes(wasteType) // Update data
 
 	fmt.Print("Masukkan metode daur ulang sampah: ")
-	fmt.Scan(&metodeDaurUlang)
-	metodeDaurUlang = recyclingMethods(metodeDaurUlang, jenis) // Update data
+	fmt.Scan(&recyclingMethod)
+	recyclingMethod = recyclingMethods(recyclingMethod, wasteType) // Update data
 
 	fmt.Print("Masukkan jumlah sampah: ")
-	fmt.Scan(&jumlah)
+	fmt.Scan(&quantity)
 
 	fmt.Print("Masukkan lokasi pengumpulan: ")
-	fmt.Scan(&lokasi)
+	fmt.Scan(&location)
 
 	fmt.Print("Masukkan status daur ulang (y/n): ")
 	fmt.Scan(&status)
@@ -109,43 +147,53 @@ func updateData() {
 		status = "nil"
 	}
 
-	DataSampah[index] = Sampah{ // Update DataSampah
-		Jenis:           jenis,
-		MetodeDaurUlang: metodeDaurUlang,
-		Jumlah:          jumlah,
-		Lokasi:          lokasi,
+	WasteData[index] = Waste{ // Update DataSampah
+		WasteType:       wasteType,
+		RecyclingMethod: recyclingMethod,
+		Quantity:        quantity,
+		Location:        location,
 		Status:          status,
 	}
 
 	fmt.Println("Data berhasil diubah.")
 
 	fmt.Println() // Spacing
+
+	pressToContinue()
+	clearConsole()
 }
 
 func deleteData() {
-	clearConsole() // Clear console
+	clearConsole()
 
 	var (
 		index         int
 		confirmDelete string
 	)
 
-	if len(DataSampah) == 0 { // Panjang DataSampah == 0
+	if len(WasteData) == 0 { // Panjang DataSampah == 0
 		fmt.Println("Tidak ada data yang tersedia untuk dihapus.")
 		fmt.Println() // Spacing
 		return
 	}
 
+	TriggerShowData = false
 	showAllData() // Memunculkan tabel data
+	TriggerShowData = true
 
 	fmt.Print("Masukkan nomor data yang ingin dihapus: ")
 	fmt.Scan(&index)
 
 	index-- // Ubah ke index array (mulai dari 0)
 
-	if index < 0 || index >= len(DataSampah) { // Input < 0 / input >= panjang DataSampah
+	if index < 0 || index >= len(WasteData) { // Input < 0 / input >= panjang WasteData
 		fmt.Println("Nomor data tidak valid.")
+
 		fmt.Println() // Spacing
+
+		pressToContinue()
+		clearConsole()
+
 		return
 	}
 
@@ -153,12 +201,12 @@ func deleteData() {
 	fmt.Scan(&confirmDelete)
 
 	if strToLower(confirmDelete) == "y" {
-		for i := index; i < len(DataSampah)-1; i++ { // Geser ke kiri
-			DataSampah[i] = DataSampah[i+1]
+		for i := index; i < len(WasteData)-1; i++ { // Geser ke kiri
+			WasteData[i] = WasteData[i+1]
 		}
-		DataSampah = DataSampah[:len(DataSampah)-1] // Pangkas slice
+		WasteData = WasteData[:len(WasteData)-1] // Pangkas slice
 
-		clearConsole() // Clear console
+		clearConsole()
 
 		fmt.Println("Data berhasil dihapus.")
 	} else {
@@ -166,10 +214,9 @@ func deleteData() {
 	}
 
 	fmt.Println() // Spacing
-}
 
-func recordProcess() {
-	// TODO:
+	pressToContinue()
+	clearConsole()
 }
 
 func searchData() {
@@ -180,29 +227,10 @@ func sortData() {
 	// TODO:
 }
 
-func showStatistics() {
+func recordProcess() {
 	// TODO:
 }
 
-func showAllData() {
-	clearConsole() // Clear console
-
-	var data Sampah
-
-	if len(DataSampah) == 0 { // Panjang DataSampah == 0
-		fmt.Println("Belum ada data sampah yang tersedia.")
-		fmt.Println() // Spacing
-		return
-	}
-
-	fmt.Println("========================================================================================")
-	fmt.Printf("|| %-3s || %-15s || %-6s || %-20s || %-10s || %-8s ||\n", "No", "jenis", "Jumlah", "Metode Daur Ulang", "Lokasi", "Status")
-	fmt.Println("||====================================================================================||")
-	for i := 0; i < len(DataSampah); i++ { // Loop data
-		data = DataSampah[i]
-		fmt.Printf("|| %-3d || %-15s || %-6d || %-20s || %-10s || %-8s ||\n", i+1, data.Jenis, data.Jumlah, data.MetodeDaurUlang, data.Lokasi, data.Status)
-	}
-	fmt.Println("========================================================================================")
-
-	fmt.Println() // Spacing
+func showStatistics() {
+	// TODO:
 }
