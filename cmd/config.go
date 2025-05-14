@@ -13,7 +13,7 @@ type Waste struct { // Struktur data sampah
 var (
 	WasteData       []Waste          // Untuk menyimpan input data ke dalam array
 	TriggerShowData bool    = true   // Enable dan disable -> pressToContinue() dan clearConsole() pada fungsi showAllData()
-	Version         string  = "v0.7" // Versi aplikasi
+	Version         string  = "v0.8" // Versi aplikasi
 )
 
 func showTableMenu() { // showMenu function untuk memunculkan menu
@@ -28,10 +28,9 @@ func showTableMenu() { // showMenu function untuk memunculkan menu
 	fmt.Println("||  6. Urutkan data sampah                               ||")
 	fmt.Println("||  7. Catat proses daur ulang                           ||")
 	fmt.Println("||  8. Tampilkan statistik                               ||")
-	fmt.Println("||  9. Clear Console                                     ||")
-	fmt.Println("||  10. Keluar program                                   ||")
+	fmt.Println("||  9. Keluar program                                    ||")
 	fmt.Println("===========================================================")
-	fmt.Print("Pilih menu (1-10): ")
+	fmt.Print("Pilih menu (1-9): ")
 }
 
 func showRecycleTypeTable() { // showRecycleTypeTable fungsi untuk menampilkan tabel jenis-jenis sampah daur ulang
