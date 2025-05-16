@@ -1,3 +1,3 @@
-module aplikasi_pengelolaan_data_sampah
+module sampah-app
 
-go 1.23.1
+go 1.20

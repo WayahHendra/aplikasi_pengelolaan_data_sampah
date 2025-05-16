@@ -1,0 +1,16 @@
+[
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "Kompos",
+    "Quantity": 12.5,
+    "Location": "Bogor",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "Biogas",
+    "Quantity": 99.8,
+    "Location": "Jakarta",
+    "Status": "Belum"
+  }
+]
