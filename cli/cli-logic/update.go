@@ -6,39 +6,42 @@ import (
 	"trash-app/utils"
 )
 
+// UpdateWaste memungkinkan pengguna untuk mengubah data sampah yang sudah ada.
 func UpdateWaste() {
 	utils.ClearConsole()
 
 	var (
-		wasteType       string
-		recyclingMethod string
-		quantity        float64
-		location        string
-		status          string
+		wasteType       string  // Jenis sampah
+		recyclingMethod string  // Metode daur ulang
+		quantity        float64 // Jumlah sampah (dalam kg)
+		location        string  // Lokasi pengumpulan
+		status          string  // Status daur ulang (sudah/belum)
 	)
 
 	var (
-		confirmUpdate string
-		index         int
+		confirmUpdate string // Konfirmasi pengubahan data
+		index         int    // Indeks data yang akan diubah
 	)
 
-	core.TriggerShowData = false
-	ReadWaste() // Menampilkan tabel data
-	core.TriggerShowData = true
+	core.TriggerShowData = false // Nonaktifkan trigger untuk membersihkan konsol
+	ReadWaste()                  // Menampilkan tabel data
+	core.TriggerShowData = true  // Aktifkan kembali trigger
 
-	if len(core.WasteData) == 0 { // Panjang data sampah == 0
+	// Validasi apakah ada data yang tersedia
+	if len(core.WasteData) == 0 {
 		return
 	}
 
 	fmt.Print("Masukkan nomor data yang ingin diubah: ")
 	fmt.Scan(&index)
 
-	index-- // Ubah ke index 0-based
+	index-- // Ubah ke indeks berbasis 0
 
-	if index < 0 || index >= len(core.WasteData) { // Input < 0 / input >= panjang data sampah
+	// Validasi indeks
+	if index < 0 || index >= len(core.WasteData) {
 		fmt.Println("Nomor data tidak valid.")
 
-		fmt.Println() // Spacing
+		fmt.Println()
 
 		utils.PressToContinue()
 		utils.ClearConsole()
@@ -54,7 +57,7 @@ func UpdateWaste() {
 
 		core.ShowRecycleTypeTable() // Menampilkan jenis-jenis sampah daur ulang
 
-		fmt.Println() // Spacing
+		fmt.Println()
 
 		fmt.Println("Data yang akan diubah:")
 		fmt.Println("========================================================================================================")
@@ -63,7 +66,7 @@ func UpdateWaste() {
 		fmt.Printf("|| %-3d || %-15s || %-20s || %-12s || %-20s || %-8s ||\n", index+1, core.WasteData[index].WasteType, core.WasteData[index].RecyclingMethod, fmt.Sprint(core.WasteData[index].Quantity, " kg"), core.WasteData[index].Location, core.WasteData[index].Status)
 		fmt.Println("========================================================================================================")
 
-		fmt.Println() // Spacing
+		fmt.Println()
 
 		fmt.Print("Masukkan jenis sampah: ")
 		fmt.Scan(&wasteType)
@@ -80,7 +83,7 @@ func UpdateWaste() {
 		fmt.Print("Masukkan status daur ulang (y/n): ")
 		fmt.Scan(&status)
 
-		// Pakai core.Create untuk normalisasi dan validasi
+		// Gunakan core.CreateData untuk normalisasi dan validasi data baru
 		core.WasteData[index] = core.CreateData(wasteType, recyclingMethod, quantity, location, status)
 
 		fmt.Println("Data berhasil diubah.")
@@ -90,7 +93,7 @@ func UpdateWaste() {
 		fmt.Println("Input tidak valid!")
 	}
 
-	fmt.Println() // Spacing
+	fmt.Println()
 
 	utils.PressToContinue()
 	utils.ClearConsole()

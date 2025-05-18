@@ -5,7 +5,8 @@ import (
 	"trash-app/utils"
 )
 
-func ShowRecycleTypeTable() { // showRecycleTypeTable() untuk menampilkan tabel jenis-jenis sampah daur ulang
+// ShowRecycleTypeTable menampilkan tabel jenis sampah, metode daur ulang, dan deskripsi singkat.
+func ShowRecycleTypeTable() {
 	fmt.Println("Data daur ulang yang tersedia:")
 	fmt.Println("=============================================================================================================================")
 	fmt.Printf("|| %-20s || %-25s || %-66s ||\n", "Jenis Sampah", "Metode Daur Ulang", "Deskripsi Singkat")
@@ -27,6 +28,7 @@ func ShowRecycleTypeTable() { // showRecycleTypeTable() untuk menampilkan tabel 
 	fmt.Println("=============================================================================================================================")
 }
 
+// GarbageTypes mengembalikan jenis sampah berdasarkan input pengguna.
 func GarbageTypes(input string) string {
 	switch utils.StrToLower(input) {
 	case "1", "o", "or", "org", "orga", "organ", "organi", "organik":
@@ -40,6 +42,7 @@ func GarbageTypes(input string) string {
 	}
 }
 
+// RecyclingMethods mengembalikan metode daur ulang berdasarkan input dan jenis sampah.
 func RecyclingMethods(input, wasteType string) string {
 	switch wasteType {
 	case "Organik":

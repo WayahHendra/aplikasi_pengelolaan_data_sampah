@@ -6,14 +6,17 @@ import (
 	"trash-app/utils"
 )
 
+// ReadWaste menampilkan data sampah yang tersimpan.
 func ReadWaste() {
 	utils.ClearConsole()
 
-	var waste core.Waste
+	var waste core.Waste // Variabel sementara untuk menyimpan data sampah
 
-	if len(core.WasteData) == 0 { // Panjang data sampah == 0
+	// Periksa apakah ada data sampah yang tersedia
+	if len(core.WasteData) == 0 {
 		fmt.Println("Belum ada data sampah yang tersedia.")
-		fmt.Println() // Spacing
+
+		fmt.Println()
 
 		utils.PressToContinue()
 		utils.ClearConsole()
@@ -24,14 +27,16 @@ func ReadWaste() {
 	fmt.Println("========================================================================================================")
 	fmt.Printf("|| %-3s || %-15s || %-20s || %-12s || %-20s || %-8s ||\n", "No", "Jenis", "Metode Daur Ulang", "Jumlah", "Lokasi", "Status")
 	fmt.Println("||====================================================================================================||")
-	for i := 0; i < len(core.WasteData); i++ { // Loop data
-		waste = core.WasteData[i]
+	// Iterasi untuk menampilkan setiap data sampah
+	for i := 0; i < len(core.WasteData); i++ {
+		waste = core.WasteData[i] // Ambil data sampah
 		fmt.Printf("|| %-3d || %-15s || %-20s || %-12s || %-20s || %-8s ||\n", i+1, waste.WasteType, waste.RecyclingMethod, fmt.Sprint(waste.Quantity, " kg"), waste.Location, waste.Status)
 	}
 	fmt.Println("========================================================================================================")
 
-	fmt.Println() // Spacing
+	fmt.Println()
 
+	// Jika trigger aktif, tunggu input untuk melanjutkan dan bersihkan layar
 	if core.TriggerShowData {
 		utils.PressToContinue()
 		utils.ClearConsole()

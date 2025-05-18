@@ -6,17 +6,19 @@ import (
 	"trash-app/utils"
 )
 
+// DeleteWaste memungkinkan pengguna untuk menghapus data sampah.
 func DeleteWaste() {
 	utils.ClearConsole()
 
 	var (
-		index         int
-		confirmDelete string
+		index         int    // Indeks data yang akan dihapus
+		confirmDelete string // Konfirmasi penghapusan
 	)
 
-	if len(core.WasteData) == 0 { // Panjang data sampah == 0
+	// Periksa apakah ada data yang tersedia
+	if len(core.WasteData) == 0 {
 		fmt.Println("Tidak ada data yang tersedia untuk dihapus.")
-		fmt.Println() // Spacing
+		fmt.Println()
 
 		utils.PressToContinue()
 		utils.ClearConsole()
@@ -24,19 +26,21 @@ func DeleteWaste() {
 		return
 	}
 
-	core.TriggerShowData = false
-	ReadWaste() // Memunculkan tabel data
-	core.TriggerShowData = true
+	// Tampilkan data sampah
+	core.TriggerShowData = false // Nonaktifkan trigger untuk membersihkan konsol
+	ReadWaste()                  // Tampilkan data
+	core.TriggerShowData = true  // Aktifkan kembali trigger
 
 	fmt.Print("Masukkan nomor data yang ingin dihapus: ")
 	fmt.Scan(&index)
 
-	index-- // Ubah ke index array (mulai dari 0)
+	index-- // Konversi nomor ke indeks (dimulai dari 0)
 
-	if index < 0 || index >= len(core.WasteData) { // Input < 0 / input >= panjang data sampah
+	// Validasi indeks
+	if index < 0 || index >= len(core.WasteData) {
 		fmt.Println("Nomor data tidak valid.")
 
-		fmt.Println() // Spacing
+		fmt.Println()
 
 		utils.PressToContinue()
 		utils.ClearConsole()
@@ -47,19 +51,20 @@ func DeleteWaste() {
 	fmt.Print("Yakin ingin menghapus data? (y/n): ")
 	fmt.Scan(&confirmDelete)
 
+	// Proses penghapusan berdasarkan konfirmasi
 	if utils.StrToLower(confirmDelete) == "y" {
-		core.DeleteData(index) // Hapus data
+		core.DeleteData(index) // Hapus data berdasarkan indeks
 
 		utils.ClearConsole()
 
 		fmt.Println("Data berhasil dihapus.")
 	} else if utils.StrToLower(confirmDelete) == "n" {
-		fmt.Println("Gagal menghapus data.")
+		fmt.Println("Penghapusan data dibatalkan.")
 	} else {
 		fmt.Println("Input tidak valid!")
 	}
 
-	fmt.Println() // Spacing
+	fmt.Println()
 
 	utils.PressToContinue()
 	utils.ClearConsole()

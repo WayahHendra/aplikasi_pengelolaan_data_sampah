@@ -1,15 +1,17 @@
 package core
 
+// Struktur data untuk pengelolaan sampah
 type Waste struct {
-	WasteType       string
-	RecyclingMethod string
-	Quantity        float64
-	Location        string
-	Status          string
+	WasteType       string  // Jenis sampah
+	RecyclingMethod string  // Metode daur ulang
+	Quantity        float64 // Jumlah sampah (dalam kg)
+	Location        string  // Lokasi pengumpulan sampah
+	Status          string  // Status daur ulang (sudah/belum)
 }
 
+// Daftar variabel terkait data sampah
 var (
-	WasteData       []Waste
-	TriggerShowData bool   = true
-	Version         string = "v1.2.2"
+	WasteData       []Waste            // Slice untuk menyimpan data sampah
+	TriggerShowData bool    = true     // Trigger untuk menggunakan PressToContinue dan ClearConsole di fungsi ReadWaste
+	Version         string  = "v1.2.3" // Versi aplikasi
 )
