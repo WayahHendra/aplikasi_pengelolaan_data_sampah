@@ -6,24 +6,26 @@ import (
 	"trash-app/utils"
 )
 
+// SortWaste memungkinkan pengguna untuk mengurutkan data sampah berdasarkan kolom tertentu.
 func SortWaste() {
 	utils.ClearConsole()
 
 	var (
-		sortFieldChoice     string // Input user (1/2/3/4)
-		sortOrderChoice     string // Input user (1/2)
-		sortAlgorithmChoice string // Input user (1/2)
-		sortField           string // Output: "jenis", "metode", "jumlah", "lokasi"
-		sortAscending       bool   // Output: true (ascending), false (descending)
+		sortFieldChoice     string // Input pengguna untuk memilih kolom pengurutan (1/2/3/4)
+		sortOrderChoice     string // Input pengguna untuk memilih urutan pengurutan (1/2)
+		sortAlgorithmChoice string // Input pengguna untuk memilih algoritma pengurutan (1/2)
+		sortField           string // Kolom pengurutan: "jenis", "metode", "jumlah", "lokasi"
+		sortAscending       bool   // Urutan pengurutan: true (ascending), false (descending)
 	)
 
-	if len(core.WasteData) == 0 { // Panjang data sampah == 0
+	// Periksa apakah ada data sampah yang tersedia
+	if len(core.WasteData) == 0 {
 		fmt.Println("Belum ada data sampah yang tersedia.")
-		fmt.Println() // Spacing
+
+		fmt.Println()
 
 		utils.PressToContinue()
 		utils.ClearConsole()
-
 		return
 	}
 
@@ -34,28 +36,29 @@ func SortWaste() {
 	fmt.Println("4. Lokasi Pengumpulan")
 	fmt.Print("Masukkan pilihan (1-4): ")
 	fmt.Scan(&sortFieldChoice)
-	core.SetSortField(&sortField, sortFieldChoice)
+	core.SetSortField(&sortField, sortFieldChoice) // Tentukan kolom pengurutan
 
-	fmt.Println() // Spacing
+	fmt.Println()
 
 	fmt.Println("Urutan pengurutan:")
 	fmt.Println("1. Naik (Ascending)")
 	fmt.Println("2. Turun (Descending)")
 	fmt.Print("Masukkan pilihan (1-2): ")
 	fmt.Scan(&sortOrderChoice)
-	core.SetSortOrder(&sortAscending, sortOrderChoice)
+	core.SetSortOrder(&sortAscending, sortOrderChoice) // Tentukan urutan pengurutan
 
-	fmt.Println() // Spacing
+	fmt.Println()
 
 	fmt.Println("Pilih algoritma pengurutan:")
 	fmt.Println("1. Selection Sort")
 	fmt.Println("2. Insertion Sort")
 	fmt.Print("Masukkan pilihan (1-2): ")
 	fmt.Scan(&sortAlgorithmChoice)
-	core.SortByAlgorithm(sortAlgorithmChoice, sortField, sortAscending)
+	core.SortByAlgorithm(sortAlgorithmChoice, sortField, sortAscending) // Jalankan algoritma pengurutan
 
-	fmt.Println() // Spacing
+	fmt.Println()
 
+	// Tampilkan pesan sukses berdasarkan kolom dan urutan pengurutan
 	switch sortField {
 	case "jenis":
 		if sortAscending {
@@ -83,7 +86,7 @@ func SortWaste() {
 		}
 	}
 
-	fmt.Println() // Spacing
+	fmt.Println()
 
 	utils.PressToContinue()
 	utils.ClearConsole()
