@@ -5,7 +5,8 @@ import (
 	"trash-app/core"
 )
 
-func ShowTableMenu() { // showTableMenu() untuk memunculkan menu
+// ShowTableMenu menampilkan menu utama untuk aplikasi.
+func ShowTableMenu() {
 	fmt.Println("=============================================================")
 	fmt.Println("||   SELAMAT DATANG DI APLIKASI DAUR ULANG SAMPAH", core.Version, "  ||")
 	fmt.Println("||=========================================================||")
@@ -17,8 +18,8 @@ func ShowTableMenu() { // showTableMenu() untuk memunculkan menu
 	fmt.Println("||  6. Urutkan data                                        ||")
 	fmt.Println("||  7. Catat proses daur ulang                             ||")
 	fmt.Println("||  8. Tampilkan statistik                                 ||")
-	fmt.Println("||  9. Save data                                           ||")
-	fmt.Println("||  10. Load data                                          ||")
+	fmt.Println("||  9. Simpan data                                         ||")
+	fmt.Println("||  10. Muat data                                          ||")
 	fmt.Println("||  11. Keluar program                                     ||")
 	fmt.Println("=============================================================")
 	fmt.Print("Pilih menu (1-11): ")

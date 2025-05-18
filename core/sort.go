@@ -5,10 +5,12 @@ import (
 	"trash-app/utils"
 )
 
+// SelectionSort mengurutkan data menggunakan algoritma Selection Sort.
 func SelectionSort(sortField string, sortAscending bool) {
 	for i := 0; i < len(WasteData)-1; i++ {
 		minOrMaxIdx := i
 		for j := i + 1; j < len(WasteData); j++ {
+			// Tentukan elemen minimum/maksimum berdasarkan field yang dipilih
 			switch sortField {
 			case "jenis":
 				if (sortAscending && WasteData[j].WasteType < WasteData[minOrMaxIdx].WasteType) || (!sortAscending && WasteData[j].WasteType > WasteData[minOrMaxIdx].WasteType) {
@@ -28,15 +30,18 @@ func SelectionSort(sortField string, sortAscending bool) {
 				}
 			}
 		}
-		WasteData[i], WasteData[minOrMaxIdx] = WasteData[minOrMaxIdx], WasteData[i]
+
+		WasteData[i], WasteData[minOrMaxIdx] = WasteData[minOrMaxIdx], WasteData[i] // Tukar elemen
 	}
 }
 
+// InsertionSort mengurutkan data menggunakan algoritma Insertion Sort.
 func InsertionSort(sortField string, sortAscending bool) {
 	for i := 1; i < len(WasteData); i++ {
 		key := WasteData[i]
 		j := i - 1
 
+		// Geser elemen untuk menemukan posisi yang tepat
 		for j >= 0 {
 			shouldSwap := false
 			switch sortField {
@@ -54,29 +59,32 @@ func InsertionSort(sortField string, sortAscending bool) {
 				break
 			}
 
-			WasteData[j+1] = WasteData[j]
+			WasteData[j+1] = WasteData[j] // Geser elemen ke kanan
 			j--
 		}
-		WasteData[j+1] = key
+
+		WasteData[j+1] = key // Sisipkan elemen pada posisi yang tepat
 	}
 }
 
+// SetSortField menentukan field pengurutan berdasarkan input pengguna.
 func SetSortField(output *string, input string) {
 	switch utils.StrToLower(input) {
 	case "1":
-		*output = "jenis" // WasteType
+		*output = "jenis" // Field: WasteType
 	case "2":
-		*output = "metode" // RecyclingMethod
+		*output = "metode" // Field: RecyclingMethod
 	case "3":
-		*output = "jumlah" // Quantity
+		*output = "jumlah" // Field: Quantity
 	case "4":
-		*output = "lokasi"
+		*output = "lokasi" // Field: Location
 	default:
 		fmt.Println("Pilihan pengurutan tidak valid. Gunakan 1, 2, 3, atau 4.")
 		*output = ""
 	}
 }
 
+// SetSortOrder menentukan urutan pengurutan (Ascending/Descending) berdasarkan input pengguna.
 func SetSortOrder(output *bool, input string) {
 	switch utils.StrToLower(input) {
 	case "1":
@@ -88,12 +96,13 @@ func SetSortOrder(output *bool, input string) {
 	}
 }
 
+// SortByAlgorithm memilih algoritma pengurutan berdasarkan input pengguna.
 func SortByAlgorithm(algorithmChoice string, sortField string, sortAscending bool) {
 	switch algorithmChoice {
 	case "1":
-		SelectionSort(sortField, sortAscending)
+		SelectionSort(sortField, sortAscending) // Gunakan Selection Sort
 	case "2":
-		InsertionSort(sortField, sortAscending)
+		InsertionSort(sortField, sortAscending) // Gunakan Insertion Sort
 	default:
 		fmt.Println("Pilihan tidak valid. Gunakan 1 untuk Selection Sort, 2 Insertion Sort.")
 	}
