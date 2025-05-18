@@ -1,0 +1,247 @@
+[
+  {
+    "WasteType": "Anorganik",
+    "RecyclingMethod": "Peleburan",
+    "Quantity": 24.1,
+    "Location": "Jakarta",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Anorganik",
+    "RecyclingMethod": "Reuse",
+    "Quantity": 18,
+    "Location": "Medan",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Anorganik",
+    "RecyclingMethod": "Upcycling",
+    "Quantity": 20,
+    "Location": "Bogor",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "Anorganik",
+    "RecyclingMethod": "Ecobricks",
+    "Quantity": 22.5,
+    "Location": "Jakarta",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "Anorganik",
+    "RecyclingMethod": "Downcycling",
+    "Quantity": 16,
+    "Location": "Bogor",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "Anorganik",
+    "RecyclingMethod": "Peleburan",
+    "Quantity": 15,
+    "Location": "Bandung",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Anorganik",
+    "RecyclingMethod": "Reuse",
+    "Quantity": 19,
+    "Location": "Medan",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "Anorganik",
+    "RecyclingMethod": "Upcycling",
+    "Quantity": 21,
+    "Location": "Bogor",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "Anorganik",
+    "RecyclingMethod": "Ecobricks",
+    "Quantity": 23,
+    "Location": "Jakarta",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Anorganik",
+    "RecyclingMethod": "Downcycling",
+    "Quantity": 17,
+    "Location": "Bogor",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "Anorganik",
+    "RecyclingMethod": "Peleburan",
+    "Quantity": 25,
+    "Location": "Bandung",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "B3",
+    "RecyclingMethod": "Insinerasi",
+    "Quantity": 5,
+    "Location": "Bandung",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "B3",
+    "RecyclingMethod": "Stabilisasi",
+    "Quantity": 7,
+    "Location": "Bogor",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "B3",
+    "RecyclingMethod": "Kimia",
+    "Quantity": 4.5,
+    "Location": "Bandung",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "B3",
+    "RecyclingMethod": "Insinerasi",
+    "Quantity": 3,
+    "Location": "Jakarta",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "B3",
+    "RecyclingMethod": "Insinerasi",
+    "Quantity": 6,
+    "Location": "Bandung",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "B3",
+    "RecyclingMethod": "Kimia",
+    "Quantity": 5.5,
+    "Location": "Bandung",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "B3",
+    "RecyclingMethod": "Stabilisasi",
+    "Quantity": 8,
+    "Location": "Bogor",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "B3",
+    "RecyclingMethod": "Insinerasi",
+    "Quantity": 7,
+    "Location": "Bandung",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "B3",
+    "RecyclingMethod": "Kimia",
+    "Quantity": 9,
+    "Location": "Bandung",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "B3",
+    "RecyclingMethod": "Insinerasi",
+    "Quantity": 10,
+    "Location": "Bandung",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "B3",
+    "RecyclingMethod": "Kimia",
+    "Quantity": 11,
+    "Location": "Bandung",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "Kompos",
+    "Quantity": 12.5,
+    "Location": "Bogor",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "Biogas",
+    "Quantity": 8.5,
+    "Location": "Surabaya",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "BSF",
+    "Quantity": 10,
+    "Location": "Jakarta",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "Kompos",
+    "Quantity": 6,
+    "Location": "Bandung",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "Kompos",
+    "Quantity": 9,
+    "Location": "Bogor",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "Kompos",
+    "Quantity": 7.5,
+    "Location": "Jakarta",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "Biogas",
+    "Quantity": 11,
+    "Location": "Surabaya",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "Kompos",
+    "Quantity": 13,
+    "Location": "Jakarta",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "BSF",
+    "Quantity": 12,
+    "Location": "Surabaya",
+    "Status": "Belum"
+  },
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "Kompos",
+    "Quantity": 14,
+    "Location": "Bogor",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "Kompos",
+    "Quantity": 15,
+    "Location": "Jakarta",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Organik",
+    "RecyclingMethod": "Kompos",
+    "Quantity": 2.5,
+    "Location": "Bandung",
+    "Status": "Sudah"
+  },
+  {
+    "WasteType": "Anorganik",
+    "RecyclingMethod": "Upcycling",
+    "Quantity": 1.5,
+    "Location": "Jakarta",
+    "Status": "Sudah"
+  }
+]
