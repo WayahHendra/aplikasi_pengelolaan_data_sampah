@@ -3,8 +3,7 @@ package main
 import (
 	"fmt"
 	"sampah-app/cli/menus"
-	"sampah-app/cli/utils"
-	"sampah-app/validation"
+	"sampah-app/utils"
 )
 
 func main() {
@@ -27,7 +26,7 @@ func main() {
 			menus.ShowTableMenu()
 
 			fmt.Scan(&input)
-			value, err := validation.ValidateInput(input)
+			value, err := utils.ValidateInput(input)
 
 			if err != nil {
 				fmt.Println("error:", err)

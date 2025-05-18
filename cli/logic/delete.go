@@ -2,11 +2,11 @@ package logic
 
 import (
 	"fmt"
-	"sampah-app/cli/data"
-	"sampah-app/cli/utils"
+	"sampah-app/core"
+	"sampah-app/utils"
 )
 
-func DeleteData() {
+func DeleteWaste() {
 	utils.ClearConsole()
 
 	var (
@@ -14,7 +14,7 @@ func DeleteData() {
 		confirmDelete string
 	)
 
-	if len(data.WasteData) == 0 { // Panjang data sampah == 0
+	if len(core.WasteData) == 0 { // Panjang data sampah == 0
 		fmt.Println("Tidak ada data yang tersedia untuk dihapus.")
 		fmt.Println() // Spacing
 
@@ -24,16 +24,16 @@ func DeleteData() {
 		return
 	}
 
-	data.TriggerShowData = false
-	ShowAllData() // Memunculkan tabel data
-	data.TriggerShowData = true
+	core.TriggerShowData = false
+	ReadWaste() // Memunculkan tabel data
+	core.TriggerShowData = true
 
 	fmt.Print("Masukkan nomor data yang ingin dihapus: ")
 	fmt.Scan(&index)
 
 	index-- // Ubah ke index array (mulai dari 0)
 
-	if index < 0 || index >= len(data.WasteData) { // Input < 0 / input >= panjang data sampah
+	if index < 0 || index >= len(core.WasteData) { // Input < 0 / input >= panjang data sampah
 		fmt.Println("Nomor data tidak valid.")
 
 		fmt.Println() // Spacing
@@ -48,10 +48,7 @@ func DeleteData() {
 	fmt.Scan(&confirmDelete)
 
 	if utils.StrToLower(confirmDelete) == "y" {
-		for i := index; i < len(data.WasteData)-1; i++ { // Geser ke kiri
-			data.WasteData[i] = data.WasteData[i+1]
-		}
-		data.WasteData = data.WasteData[:len(data.WasteData)-1] // Pangkas slice
+		core.DeleteData(index) // Hapus data
 
 		utils.ClearConsole()
 

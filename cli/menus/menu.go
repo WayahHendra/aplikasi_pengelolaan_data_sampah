@@ -2,12 +2,12 @@ package menus
 
 import (
 	"fmt"
-	"sampah-app/cli/data"
+	"sampah-app/core"
 )
 
 func ShowTableMenu() { // showTableMenu() untuk memunculkan menu
 	fmt.Println("===========================================================")
-	fmt.Println("||   SELAMAT DATANG DI APLIKASI DAUR ULANG SAMPAH", data.Version, "  ||")
+	fmt.Println("||   SELAMAT DATANG DI APLIKASI DAUR ULANG SAMPAH", core.Version, "  ||")
 	fmt.Println("||=======================================================||")
 	fmt.Println("||  1. Tambah data sampah              C                 ||")
 	fmt.Println("||  2. Tampilkan semua data            R                 ||")

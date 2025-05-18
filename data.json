@@ -7,10 +7,10 @@
     "Status": "Sudah"
   },
   {
-    "WasteType": "Organik",
-    "RecyclingMethod": "Biogas",
-    "Quantity": 99.8,
+    "WasteType": "Anorganik",
+    "RecyclingMethod": "Peleburan",
+    "Quantity": 24.1,
     "Location": "Jakarta",
-    "Status": "Belum"
+    "Status": "Sudah"
   }
 ]

@@ -1,4 +1,4 @@
-package data
+package core
 
 type Waste struct {
 	WasteType       string
@@ -11,5 +11,5 @@ type Waste struct {
 var (
 	WasteData       []Waste
 	TriggerShowData bool   = true
-	Version         string = "v1.0"
+	Version         string = "v1.1"
 )

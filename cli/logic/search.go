@@ -1,3 +1,3 @@
 package logic
 
-func SearchData() {}
+func SearchWaste() {}

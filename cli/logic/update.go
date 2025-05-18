@@ -2,15 +2,14 @@ package logic
 
 import (
 	"fmt"
-	"sampah-app/cli/data"
-	"sampah-app/cli/utils"
+	"sampah-app/core"
+	"sampah-app/utils"
 )
 
-func UpdateData() {
+func UpdateWaste() {
 	utils.ClearConsole()
 
 	var (
-		index           int
 		wasteType       string
 		recyclingMethod string
 		quantity        float64
@@ -18,20 +17,25 @@ func UpdateData() {
 		status          string
 	)
 
-	data.TriggerShowData = false
-	ShowAllData() // Memunculkan tabel data
-	data.TriggerShowData = true
+	var (
+		confirmUpdate string
+		index         int
+	)
 
-	if len(data.WasteData) == 0 { // Panjang data sampah == 0
+	core.TriggerShowData = false
+	ReadWaste() // Menampilkan tabel data
+	core.TriggerShowData = true
+
+	if len(core.WasteData) == 0 { // Panjang data sampah == 0
 		return
 	}
 
 	fmt.Print("Masukkan nomor data yang ingin diubah: ")
 	fmt.Scan(&index)
 
-	index-- // Ubah ke index array (mulai dari 0)
+	index-- // Ubah ke index 0-based
 
-	if index < 0 || index >= len(data.WasteData) { // Input < 0 / input >= panjang data sampah
+	if index < 0 || index >= len(core.WasteData) { // Input < 0 / input >= panjang data sampah
 		fmt.Println("Nomor data tidak valid.")
 
 		fmt.Println() // Spacing
@@ -42,45 +46,49 @@ func UpdateData() {
 		return
 	}
 
-	utils.ClearConsole()
+	fmt.Print("Yakin ingin menghapus data? (y/n): ")
+	fmt.Scan(&confirmUpdate)
 
-	ShowRecycleTypeTable() // Memunculkan jenis-jenis sampah daur ulang
+	if utils.StrToLower(confirmUpdate) == "y" {
+		utils.ClearConsole()
 
-	fmt.Println() // Spacing
+		core.ShowRecycleTypeTable() // Menampilkan jenis-jenis sampah daur ulang
 
-	fmt.Print("Masukkan jenis sampah: ")
-	fmt.Scan(&wasteType)
-	wasteType = GarbageTypes(wasteType)
+		fmt.Println() // Spacing
 
-	fmt.Print("Masukkan metode daur ulang sampah: ")
-	fmt.Scan(&recyclingMethod)
-	recyclingMethod = RecyclingMethods(recyclingMethod, wasteType)
+		fmt.Println("Data yang akan diubah:")
+		fmt.Println("========================================================================================================")
+		fmt.Printf("|| %-3s || %-15s || %-20s || %-12s || %-20s || %-8s ||\n", "No", "Jenis", "Metode Daur Ulang", "Jumlah", "Lokasi", "Status")
+		fmt.Println("||====================================================================================================||")
+		fmt.Printf("|| %-3d || %-15s || %-20s || %-12s || %-20s || %-8s ||\n", index+1, core.WasteData[index].WasteType, core.WasteData[index].RecyclingMethod, fmt.Sprint(core.WasteData[index].Quantity, " kg"), core.WasteData[index].Location, core.WasteData[index].Status)
+		fmt.Println("========================================================================================================")
 
-	fmt.Print("Masukkan jumlah sampah (kg): ")
-	fmt.Scan(&quantity)
+		fmt.Println() // Spacing
 
-	fmt.Print("Masukkan lokasi pengumpulan: ")
-	fmt.Scan(&location)
+		fmt.Print("Masukkan jenis sampah: ")
+		fmt.Scan(&wasteType)
 
-	fmt.Print("Masukkan status daur ulang (y/n): ")
-	fmt.Scan(&status)
-	if utils.StrToLower(status) == "y" {
-		status = "Sudah"
-	} else if utils.StrToLower(status) == "n" {
-		status = "Belum"
+		fmt.Print("Masukkan metode daur ulang sampah: ")
+		fmt.Scan(&recyclingMethod)
+
+		fmt.Print("Masukkan jumlah sampah (kg): ")
+		fmt.Scan(&quantity)
+
+		fmt.Print("Masukkan lokasi pengumpulan: ")
+		fmt.Scan(&location)
+
+		fmt.Print("Masukkan status daur ulang (y/n): ")
+		fmt.Scan(&status)
+
+		// Pakai core.Create untuk normalisasi dan validasi
+		core.WasteData[index] = core.CreateData(wasteType, recyclingMethod, quantity, location, status)
+
+		fmt.Println("Data berhasil diubah.")
+	} else if utils.StrToLower(confirmUpdate) == "n" {
+		fmt.Println("Gagal mengubah data.")
 	} else {
-		status = "nil"
+		fmt.Println("Input tidak valid!")
 	}
-
-	data.WasteData[index] = data.Waste{ // Update DataSampah
-		WasteType:       wasteType,
-		RecyclingMethod: recyclingMethod,
-		Quantity:        quantity,
-		Location:        location,
-		Status:          status,
-	}
-
-	fmt.Println("Data berhasil diubah.")
 
 	fmt.Println() // Spacing
 
