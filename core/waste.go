@@ -11,5 +11,5 @@ type Waste struct {
 var (
 	WasteData       []Waste
 	TriggerShowData bool   = true
-	Version         string = "v1.2"
+	Version         string = "v1.2.1"
 )
