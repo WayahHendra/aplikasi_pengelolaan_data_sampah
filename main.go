@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"sampah-app/cli/menus"
-	"sampah-app/cli/utils"
-	"sampah-app/validation"
+	cli_menus "trash-app/cli/cli-menus"
+	gui_menus "trash-app/gui/gui-menus"
+	"trash-app/utils"
 )
 
 func main() {
@@ -21,20 +21,23 @@ func main() {
 	for {
 		utils.ClearConsole()
 
-		if utils.StrToLower(isGui) == "y" {
-			// TODO: Implement GUI
-		} else if utils.StrToLower(isGui) == "n" {
-			menus.ShowTableMenu()
+		if utils.StrToLower(isGui) == "yes" || utils.StrToLower(isGui) == "ye" || utils.StrToLower(isGui) == "y" {
+			gui_menus.RunGUI()
+
+			return
+		} else if utils.StrToLower(isGui) == "no" || utils.StrToLower(isGui) == "n" {
+			breakLoop = false
+			cli_menus.ShowTableMenu()
 
 			fmt.Scan(&input)
-			value, err := validation.ValidateInput(input)
+			value, err := utils.ValidateInput(input)
 
 			if err != nil {
 				fmt.Println("error:", err)
 				return
 			}
 
-			menus.HandleSelection(value, &breakLoop)
+			cli_menus.HandleSelection(value, &breakLoop)
 			if breakLoop {
 				return
 			}

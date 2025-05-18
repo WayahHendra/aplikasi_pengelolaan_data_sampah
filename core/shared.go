@@ -1,11 +1,12 @@
-package logic
+package core
 
 import (
 	"fmt"
-	"sampah-app/cli/utils"
+	"trash-app/utils"
 )
 
 func ShowRecycleTypeTable() { // showRecycleTypeTable() untuk menampilkan tabel jenis-jenis sampah daur ulang
+	fmt.Println("Data daur ulang yang tersedia:")
 	fmt.Println("=============================================================================================================================")
 	fmt.Printf("|| %-20s || %-25s || %-66s ||\n", "Jenis Sampah", "Metode Daur Ulang", "Deskripsi Singkat")
 	fmt.Println("||=========================================================================================================================||")

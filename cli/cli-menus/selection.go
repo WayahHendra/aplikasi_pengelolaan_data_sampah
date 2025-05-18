@@ -1,34 +1,34 @@
-package menus
+package cli_menus
 
 import (
 	"fmt"
-	"sampah-app/cli/data"
-	"sampah-app/cli/logic"
-	"sampah-app/cli/utils"
+	logic "trash-app/cli/cli-logic"
+	"trash-app/core"
+	"trash-app/utils"
 )
 
 func HandleSelection(value int, breakLoop *bool) {
 	switch value {
 	case 1:
-		logic.AddData()
+		logic.CreateWaste()
 	case 2:
-		logic.ShowAllData()
+		logic.ReadWaste()
 	case 3:
-		logic.UpdateData()
+		logic.UpdateWaste()
 	case 4:
-		logic.DeleteData()
+		logic.DeleteWaste()
 	case 5:
-		logic.SearchData()
+		logic.SearchWaste()
 	case 6:
-		logic.SortData()
+		logic.SortWaste()
 	case 7:
 		logic.RecordProcess()
 	case 8:
 		logic.ShowStatistics()
 	case 9:
-		data.SaveWasteData(data.WasteData)
+		logic.SaveWaste(core.WasteData)
 	case 10:
-		data.LoadWasteData(&data.WasteData)
+		logic.LoadWaste(&core.WasteData)
 	case 11:
 		fmt.Println("Keluar dari program!")
 		*breakLoop = true

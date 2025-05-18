@@ -1,3 +1,3 @@
-package logic
+package cli_logic
 
 func RecordProcess() {}

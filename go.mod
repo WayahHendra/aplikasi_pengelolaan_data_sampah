@@ -1,3 +1,3 @@
-module sampah-app
+module trash-app
 
 go 1.20
