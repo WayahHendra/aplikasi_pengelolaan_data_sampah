@@ -17,7 +17,7 @@ Trash App adalah aplikasi berbasis CLI dan GUI yang dirancang untuk membantu pen
 
 2. Masuk ke direktori proyek:
    ```bash
-   cd trash-app
+   cd aplikasi_pengelolaan_data_sampah/cmd
    ```
 
 3. Jalankan aplikasi:
