@@ -1,9 +1,9 @@
-package logic
+package cli_logic
 
 import (
 	"fmt"
-	"sampah-app/core"
-	"sampah-app/utils"
+	"trash-app/core"
+	"trash-app/utils"
 )
 
 func UpdateWaste() {
@@ -46,7 +46,7 @@ func UpdateWaste() {
 		return
 	}
 
-	fmt.Print("Yakin ingin menghapus data? (y/n): ")
+	fmt.Print("Yakin ingin mengubah data? (y/n): ")
 	fmt.Scan(&confirmUpdate)
 
 	if utils.StrToLower(confirmUpdate) == "y" {

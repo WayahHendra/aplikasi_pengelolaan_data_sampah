@@ -2,7 +2,7 @@ package core
 
 import (
 	"fmt"
-	"sampah-app/utils"
+	"trash-app/utils"
 )
 
 func SetSortField(output *string, input string) {

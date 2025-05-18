@@ -2,7 +2,7 @@ package core
 
 import (
 	"fmt"
-	"sampah-app/utils"
+	"trash-app/utils"
 )
 
 func ShowRecycleTypeTable() { // showRecycleTypeTable() untuk menampilkan tabel jenis-jenis sampah daur ulang

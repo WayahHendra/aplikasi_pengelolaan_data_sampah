@@ -2,7 +2,7 @@ package core
 
 import (
 	"fmt"
-	"sampah-app/utils"
+	"trash-app/utils"
 )
 
 func CreateData(wasteType string, recyclingMethod string, quantity float64, location string, status string) Waste {
@@ -10,9 +10,9 @@ func CreateData(wasteType string, recyclingMethod string, quantity float64, loca
 
 	recyclingMethod = RecyclingMethods(recyclingMethod, wasteType)
 
-	if utils.StrToLower(status) == "y" {
+	if utils.StrToLower(status) == "yes" || utils.StrToLower(status) == "ye" || utils.StrToLower(status) == "y" || utils.StrToLower(status) == "sudah" {
 		status = "Sudah"
-	} else if utils.StrToLower(status) == "n" {
+	} else if utils.StrToLower(status) == "no" || utils.StrToLower(status) == "n" || utils.StrToLower(status) == "belum" {
 		status = "Belum"
 	} else {
 		status = "nil"

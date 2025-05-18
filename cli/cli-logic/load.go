@@ -1,9 +1,9 @@
-package logic
+package cli_logic
 
 import (
 	"fmt"
-	"sampah-app/core"
-	"sampah-app/utils"
+	"trash-app/core"
+	"trash-app/utils"
 )
 
 func LoadWaste(waste *[]core.Waste) {

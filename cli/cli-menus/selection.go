@@ -1,10 +1,10 @@
-package menus
+package cli_menus
 
 import (
 	"fmt"
-	"sampah-app/cli/logic"
-	"sampah-app/core"
-	"sampah-app/utils"
+	logic "trash-app/cli/cli-logic"
+	"trash-app/core"
+	"trash-app/utils"
 )
 
 func HandleSelection(value int, breakLoop *bool) {
