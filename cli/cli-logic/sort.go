@@ -10,10 +10,11 @@ func SortWaste() {
 	utils.ClearConsole()
 
 	var (
-		sortFieldChoice string // Input user (1/2/3)
-		sortOrderChoice string // Input user (1/2)
-		sortField       string // Output: "jenis", "metode", "jumlah"
-		sortAscending   bool   // Output: true (ascending), false (descending)
+		sortFieldChoice     string // Input user (1/2/3/4)
+		sortOrderChoice     string // Input user (1/2)
+		sortAlgorithmChoice string // Input user (1/2)
+		sortField           string // Output: "jenis", "metode", "jumlah", "lokasi"
+		sortAscending       bool   // Output: true (ascending), false (descending)
 	)
 
 	if len(core.WasteData) == 0 { // Panjang data sampah == 0
@@ -46,51 +47,39 @@ func SortWaste() {
 
 	fmt.Println() // Spacing
 
-	for i := 0; i < len(core.WasteData)-1; i++ {
-		for j := 0; j < len(core.WasteData)-i-1; j++ {
-			shouldSwap := false
+	fmt.Println("Pilih algoritma pengurutan:")
+	fmt.Println("1. Selection Sort")
+	fmt.Println("2. Insertion Sort")
+	fmt.Print("Masukkan pilihan (1-2): ")
+	fmt.Scan(&sortAlgorithmChoice)
+	core.SortByAlgorithm(sortAlgorithmChoice, sortField, sortAscending)
 
-			switch sortField {
-			case "jenis":
-				if sortAscending { // ascending
-					shouldSwap = core.WasteData[j].WasteType > core.WasteData[j+1].WasteType
-					fmt.Println("Data berhasil diurutkan berdasarkan Jenis (A-Z).")
-				} else { // descending
-					shouldSwap = core.WasteData[j].WasteType < core.WasteData[j+1].WasteType
-					fmt.Println("Data berhasil diurutkan berdasarkan Jenis (Z-A).")
-				}
-			case "metode":
-				if sortAscending { // ascending
-					shouldSwap = core.WasteData[j].RecyclingMethod > core.WasteData[j+1].RecyclingMethod
-					fmt.Println("Data berhasil diurutkan berdasarkan Metode Daur Ulang (A-Z).")
-				} else { // descending
-					shouldSwap = core.WasteData[j].RecyclingMethod < core.WasteData[j+1].RecyclingMethod
-					fmt.Println("Data berhasil diurutkan berdasarkan Metode Daur Ulang (Z-A).")
-				}
-			case "jumlah":
-				if sortAscending { // ascending
-					shouldSwap = core.WasteData[j].Quantity > core.WasteData[j+1].Quantity
-					fmt.Println("Data berhasil diurutkan berdasarkan Jumlah (terkecil ke terbesar).")
-				} else { // descending
-					shouldSwap = core.WasteData[j].Quantity < core.WasteData[j+1].Quantity
-					fmt.Println("Data berhasil diurutkan berdasarkan Jumlah (terbesar ke terkecil).")
-				}
-			case "lokasi":
-				if sortAscending { // ascending
-					shouldSwap = core.WasteData[j].Location > core.WasteData[j+1].Location
-					fmt.Println("Data berhasil diurutkan berdasarkan Lokasi (A-Z).")
-				} else { // descending
-					shouldSwap = core.WasteData[j].Location < core.WasteData[j+1].Location
-					fmt.Println("Data berhasil diurutkan berdasarkan Lokasi (Z-A).")
-				}
-			default:
-				fmt.Println("Pilihan pengurutan tidak dikenali.")
-				return
-			}
+	fmt.Println() // Spacing
 
-			if shouldSwap {
-				core.WasteData[j], core.WasteData[j+1] = core.WasteData[j+1], core.WasteData[j] // Tukar elemen
-			}
+	switch sortField {
+	case "jenis":
+		if sortAscending {
+			fmt.Println("Data berhasil diurutkan berdasarkan Jenis (A-Z).")
+		} else {
+			fmt.Println("Data berhasil diurutkan berdasarkan Jenis (Z-A).")
+		}
+	case "metode":
+		if sortAscending {
+			fmt.Println("Data berhasil diurutkan berdasarkan Metode Daur Ulang (A-Z).")
+		} else {
+			fmt.Println("Data berhasil diurutkan berdasarkan Metode Daur Ulang (Z-A).")
+		}
+	case "jumlah":
+		if sortAscending {
+			fmt.Println("Data berhasil diurutkan berdasarkan Jumlah (terkecil ke terbesar).")
+		} else {
+			fmt.Println("Data berhasil diurutkan berdasarkan Jumlah (terbesar ke terkecil).")
+		}
+	case "lokasi":
+		if sortAscending {
+			fmt.Println("Data berhasil diurutkan berdasarkan Lokasi (A-Z).")
+		} else {
+			fmt.Println("Data berhasil diurutkan berdasarkan Lokasi (Z-A).")
 		}
 	}
 

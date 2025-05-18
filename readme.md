@@ -4,8 +4,8 @@
 Trash App adalah aplikasi berbasis CLI dan GUI yang dirancang untuk membantu pengelolaan data sampah, termasuk menambah, membaca, mengubah, menghapus, mencari, mengurutkan, dan menyimpan data sampah. Aplikasi ini bertujuan untuk meningkatkan kesadaran akan pengelolaan sampah yang lebih baik.
 
 ## Features
-- **CLI Menu**: Menyediakan berbagai fitur seperti CRUD, pencarian, pengurutan, dan lainnya.
 - **GUI Placeholder**: GUI belum diimplementasikan, tetapi tersedia sebagai placeholder.
+- **CLI Menu**: Menyediakan berbagai fitur seperti CRUD, pencarian, pengurutan, dan lainnya.
 - **Pengelolaan Data Sampah**: Mendukung berbagai jenis sampah dan metode daur ulang.
 - **Penyimpanan dan Pemulihan Data**: Data dapat disimpan ke file JSON dan dimuat kembali.
 
@@ -30,6 +30,9 @@ Saat menjalankan aplikasi, Anda akan diminta untuk memilih mode:
 - **GUI Mode**: Tekan `y` (placeholder, belum diimplementasikan).
 - **CLI Mode**: Tekan `n` untuk menggunakan mode CLI.
 
+### GUI Menu
+GUI belum diimplementasikan!
+
 ### CLI Menu
 Berikut adalah daftar menu yang tersedia di mode CLI:
 1. Tambah data
@@ -43,9 +46,6 @@ Berikut adalah daftar menu yang tersedia di mode CLI:
 9. Save data
 10. Load data
 11. Keluar program
-
-### GUI Menu
-GUI belum diimplementasikan!
 
 ## Project Structure
 ```
