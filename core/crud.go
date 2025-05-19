@@ -13,9 +13,17 @@ func CreateData(wasteType string, recyclingMethod string, quantity float64, loca
 
 	// Normalisasi status (sudah atau belum didaur ulang)
 	if utils.StrToLower(status) == "yes" || utils.StrToLower(status) == "ye" || utils.StrToLower(status) == "y" || utils.StrToLower(status) == "sudah" {
-		status = "Sudah"
+		if SwitchLanguage {
+			status = "Done"
+		} else {
+			status = "Sudah"
+		}
 	} else if utils.StrToLower(status) == "no" || utils.StrToLower(status) == "n" || utils.StrToLower(status) == "belum" {
-		status = "Belum"
+		if SwitchLanguage {
+			status = "Not Done"
+		} else {
+			status = "Belum"
+		}
 	} else {
 		status = "nil"
 	}
@@ -51,7 +59,11 @@ func CreateManyData(data []Waste) []Waste {
 func DeleteData(index int) {
 	// Validasi indeks agar tidak di luar batas
 	if index < 0 || index >= len(WasteData) {
-		fmt.Println("index di luar batas")
+		if SwitchLanguage {
+			fmt.Println("Index out of range. Please enter a valid index.")
+		} else {
+			fmt.Println("Indeks di luar jangkauan. Silakan masukkan indeks yang valid.")
+		}
 		return
 	}
 
