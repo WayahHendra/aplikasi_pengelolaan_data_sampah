@@ -24,13 +24,22 @@ func CreateWaste() {
 		waste    core.Waste   // Variabel sementara untuk data sampah
 	)
 
-	fmt.Println("Berapa banyak data sampah yang ingin ditambahkan?")
-	fmt.Print("Masukkan jumlah (bilangan bulat positif): ")
+	if core.SwitchLanguage {
+		fmt.Println("How many waste data do you want to add?")
+		fmt.Print("Enter the amount (positive integer): ")
+	} else {
+		fmt.Println("Berapa banyak data sampah yang ingin ditambahkan?")
+		fmt.Print("Masukkan jumlah (bilangan bulat positif): ")
+	}
 	fmt.Scan(&count)
 
 	// Validasi jumlah data
 	if count <= 0 {
-		fmt.Println("Jumlah data tidak valid. Minimal 1.")
+		if core.SwitchLanguage {
+			fmt.Println("Invalid amount of data. Minimum 1.")
+		} else {
+			fmt.Println("Jumlah data tidak valid. Minimal 1.")
+		}
 
 		fmt.Println()
 
@@ -47,36 +56,67 @@ func CreateWaste() {
 		core.ShowRecycleTypeTable() // Tampilkan tabel data daur ulang yang tersedia
 		fmt.Println()
 
-		fmt.Print("========= Data ke-", i+1, " =========\n")
-		fmt.Print("Masukkan jenis sampah: ")
+		fmt.Print("=========== Data", i+1, " ===========\n")
+		if core.SwitchLanguage {
+			fmt.Print("Enter waste type: ")
+		} else {
+			fmt.Print("Masukkan jenis sampah: ")
+		}
 		fmt.Scan(&wasteType)
 
-		fmt.Print("Masukkan metode daur ulang: ")
+		if core.SwitchLanguage {
+			fmt.Print("Enter recycling method: ")
+		} else {
+			fmt.Print("Masukkan metode daur ulang: ")
+		}
 		fmt.Scan(&recyclingMethod)
 
-		fmt.Print("Masukkan jumlah sampah (kg): ")
+		if core.SwitchLanguage {
+			fmt.Print("Enter waste quantity (kg): ")
+		} else {
+			fmt.Print("Masukkan jumlah sampah (kg): ")
+		}
 		fmt.Scan(&quantity)
 
-		fmt.Print("Masukkan lokasi pengumpulan: ")
+		if core.SwitchLanguage {
+			fmt.Print("Enter collection location: ")
+		} else {
+			fmt.Print("Masukkan lokasi pengumpulan: ")
+		}
 		fmt.Scan(&location)
 
-		fmt.Print("Masukkan status daur ulang (y/n): ")
+		if core.SwitchLanguage {
+			fmt.Print("Enter recycling status (y/n): ")
+		} else {
+			fmt.Print("Masukkan status daur ulang (y/n): ")
+		}
 		fmt.Scan(&status)
 
 		// Tambahkan data ke slice sementara
 		tempData = append(tempData, core.CreateData(wasteType, recyclingMethod, quantity, location, status))
 
-		fmt.Print("Data ke-", i+1, " berhasil ditambahkan.\n\n")
+		if core.SwitchLanguage {
+			fmt.Print("Data ", i+1, " has been successfully added.\n\n")
+		} else {
+			fmt.Print("Data ", i+1, " berhasil ditambahkan.\n\n")
+		}
 
 		utils.PressToContinue()
 		utils.ClearConsole()
 	}
 
 	// Tampilkan data yang baru ditambahkan
-	fmt.Println("Berikut adalah data yang baru ditambahkan:")
-	fmt.Println("========================================================================================================")
-	fmt.Printf("|| %-3s || %-15s || %-20s || %-12s || %-20s || %-8s ||\n", "No", "Jenis", "Metode Daur Ulang", "Jumlah", "Lokasi", "Status")
-	fmt.Println("||====================================================================================================||")
+	if core.SwitchLanguage {
+		fmt.Println("Here is the data that has just been added:")
+		fmt.Println("========================================================================================================")
+		fmt.Printf("|| %-3s || %-15s || %-20s || %-12s || %-20s || %-8s ||\n", "No", "Type", "Recycling Method", "Quantity", "Location", "Status")
+		fmt.Println("||====================================================================================================||")
+	} else {
+		fmt.Println("Berikut adalah data yang baru ditambahkan:")
+		fmt.Println("========================================================================================================")
+		fmt.Printf("|| %-3s || %-15s || %-20s || %-12s || %-20s || %-8s ||\n", "No", "Jenis", "Metode Daur Ulang", "Jumlah", "Lokasi", "Status")
+		fmt.Println("||====================================================================================================||")
+	}
 	for i := 0; i < len(tempData); i++ {
 		waste = tempData[i] // Ambil data dari slice sementara
 		fmt.Printf("|| %-3d || %-15s || %-20s || %-12s || %-20s || %-8s ||\n", i+1, waste.WasteType, waste.RecyclingMethod, fmt.Sprint(waste.Quantity, " kg"), waste.Location, waste.Status)

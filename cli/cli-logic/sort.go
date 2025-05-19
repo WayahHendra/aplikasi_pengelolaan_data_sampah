@@ -20,7 +20,11 @@ func SortWaste() {
 
 	// Periksa apakah ada data sampah yang tersedia
 	if len(core.WasteData) == 0 {
-		fmt.Println("Belum ada data sampah yang tersedia.")
+		if core.SwitchLanguage {
+			fmt.Println("No data available to sort.")
+		} else {
+			fmt.Println("Tidak ada data yang tersedia untuk diurutkan.")
+		}
 
 		fmt.Println()
 
@@ -29,30 +33,53 @@ func SortWaste() {
 		return
 	}
 
-	fmt.Println("Urutkan data berdasarkan kolom apa?")
-	fmt.Println("1. Jenis Sampah")
-	fmt.Println("2. Metode Daur Ulang")
-	fmt.Println("3. Jumlah Sampah (kg)")
-	fmt.Println("4. Lokasi Pengumpulan")
-	fmt.Print("Masukkan pilihan (1-4): ")
+	if core.SwitchLanguage {
+		fmt.Println("Sort data by which column?")
+		fmt.Println("1. Waste Type")
+		fmt.Println("2. Recycling Method")
+		fmt.Println("3. Waste Amount (kg)")
+		fmt.Println("4. Collection Location")
+		fmt.Print("Enter your choice (1-4): ")
+	} else {
+		fmt.Println("Urutkan data berdasarkan kolom apa?")
+		fmt.Println("1. Jenis Sampah")
+		fmt.Println("2. Metode Daur Ulang")
+		fmt.Println("3. Jumlah Sampah (kg)")
+		fmt.Println("4. Lokasi Pengumpulan")
+		fmt.Print("Masukkan pilihan (1-4): ")
+	}
 	fmt.Scan(&sortFieldChoice)
 	core.SetSortField(&sortField, sortFieldChoice) // Tentukan kolom pengurutan
 
 	fmt.Println()
 
-	fmt.Println("Urutan pengurutan:")
-	fmt.Println("1. Naik (Ascending)")
-	fmt.Println("2. Turun (Descending)")
-	fmt.Print("Masukkan pilihan (1-2): ")
+	if core.SwitchLanguage {
+		fmt.Println("Sort order:")
+		fmt.Println("1. Ascending")
+		fmt.Println("2. Descending")
+		fmt.Print("Enter your choice (1-2): ")
+	} else {
+		fmt.Println("Urutan pengurutan:")
+		fmt.Println("1. Naik")
+		fmt.Println("2. Turun")
+		fmt.Print("Masukkan pilihan (1-2): ")
+	}
 	fmt.Scan(&sortOrderChoice)
 	core.SetSortOrder(&sortAscending, sortOrderChoice) // Tentukan urutan pengurutan
 
 	fmt.Println()
 
-	fmt.Println("Pilih algoritma pengurutan:")
-	fmt.Println("1. Selection Sort")
-	fmt.Println("2. Insertion Sort")
-	fmt.Print("Masukkan pilihan (1-2): ")
+	if core.SwitchLanguage {
+		fmt.Println("Choose sorting algorithm:")
+		fmt.Println("1. Selection Sort")
+		fmt.Println("2. Insertion Sort")
+		fmt.Print("Enter your choice (1-2): ")
+	} else {
+		fmt.Println("Pilih algoritma pengurutan:")
+		fmt.Println("1. Selection Sort")
+		fmt.Println("2. Insertion Sort")
+		fmt.Print("Masukkan pilihan (1-2): ")
+	}
 	fmt.Scan(&sortAlgorithmChoice)
 	core.SortByAlgorithm(sortAlgorithmChoice, sortField, sortAscending) // Jalankan algoritma pengurutan
 
@@ -62,27 +89,59 @@ func SortWaste() {
 	switch sortField {
 	case "jenis":
 		if sortAscending {
-			fmt.Println("Data berhasil diurutkan berdasarkan Jenis (A-Z).")
+			if core.SwitchLanguage {
+				fmt.Println("Data successfully sorted by Type (A-Z).")
+			} else {
+				fmt.Println("Data berhasil diurutkan berdasarkan Jenis (A-Z).")
+			}
 		} else {
-			fmt.Println("Data berhasil diurutkan berdasarkan Jenis (Z-A).")
+			if core.SwitchLanguage {
+				fmt.Println("Data successfully sorted by Type (Z-A).")
+			} else {
+				fmt.Println("Data berhasil diurutkan berdasarkan Jenis (Z-A).")
+			}
 		}
 	case "metode":
 		if sortAscending {
-			fmt.Println("Data berhasil diurutkan berdasarkan Metode Daur Ulang (A-Z).")
+			if core.SwitchLanguage {
+				fmt.Println("Data successfully sorted by Recycling Method (A-Z).")
+			} else {
+				fmt.Println("Data berhasil diurutkan berdasarkan Metode Daur Ulang (A-Z).")
+			}
 		} else {
-			fmt.Println("Data berhasil diurutkan berdasarkan Metode Daur Ulang (Z-A).")
+			if core.SwitchLanguage {
+				fmt.Println("Data successfully sorted by Recycling Method (Z-A).")
+			} else {
+				fmt.Println("Data berhasil diurutkan berdasarkan Metode Daur Ulang (Z-A).")
+			}
 		}
 	case "jumlah":
 		if sortAscending {
-			fmt.Println("Data berhasil diurutkan berdasarkan Jumlah (terkecil ke terbesar).")
+			if core.SwitchLanguage {
+				fmt.Println("Data successfully sorted by Amount (smallest to largest).")
+			} else {
+				fmt.Println("Data berhasil diurutkan berdasarkan Jumlah (terkecil ke terbesar).")
+			}
 		} else {
-			fmt.Println("Data berhasil diurutkan berdasarkan Jumlah (terbesar ke terkecil).")
+			if core.SwitchLanguage {
+				fmt.Println("Data successfully sorted by Amount (largest to smallest).")
+			} else {
+				fmt.Println("Data berhasil diurutkan berdasarkan Jumlah (terbesar ke terkecil).")
+			}
 		}
 	case "lokasi":
 		if sortAscending {
-			fmt.Println("Data berhasil diurutkan berdasarkan Lokasi (A-Z).")
+			if core.SwitchLanguage {
+				fmt.Println("Data successfully sorted by Location (A-Z).")
+			} else {
+				fmt.Println("Data berhasil diurutkan berdasarkan Lokasi (A-Z).")
+			}
 		} else {
-			fmt.Println("Data berhasil diurutkan berdasarkan Lokasi (Z-A).")
+			if core.SwitchLanguage {
+				fmt.Println("Data successfully sorted by Location (Z-A).")
+			} else {
+				fmt.Println("Data berhasil diurutkan berdasarkan Lokasi (Z-A).")
+			}
 		}
 	}
 

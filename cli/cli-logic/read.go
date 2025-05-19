@@ -14,7 +14,11 @@ func ReadWaste() {
 
 	// Periksa apakah ada data sampah yang tersedia
 	if len(core.WasteData) == 0 {
-		fmt.Println("Belum ada data sampah yang tersedia.")
+		if core.SwitchLanguage {
+			fmt.Println("No waste data available.")
+		} else {
+			fmt.Println("Belum ada data sampah yang tersedia.")
+		}
 
 		fmt.Println()
 
@@ -24,9 +28,15 @@ func ReadWaste() {
 		return
 	}
 
-	fmt.Println("========================================================================================================")
-	fmt.Printf("|| %-3s || %-15s || %-20s || %-12s || %-20s || %-8s ||\n", "No", "Jenis", "Metode Daur Ulang", "Jumlah", "Lokasi", "Status")
-	fmt.Println("||====================================================================================================||")
+	if core.SwitchLanguage {
+		fmt.Println("========================================================================================================")
+		fmt.Printf("|| %-3s || %-15s || %-20s || %-12s || %-20s || %-8s ||\n", "No", "Type", "Recycling Method", "Quantity", "Location", "Status")
+		fmt.Println("||====================================================================================================||")
+	} else {
+		fmt.Println("========================================================================================================")
+		fmt.Printf("|| %-3s || %-15s || %-20s || %-12s || %-20s || %-8s ||\n", "No", "Jenis", "Metode Daur Ulang", "Jumlah", "Lokasi", "Status")
+		fmt.Println("||====================================================================================================||")
+	}
 	// Iterasi untuk menampilkan setiap data sampah
 	for i := 0; i < len(core.WasteData); i++ {
 		waste = core.WasteData[i] // Ambil data sampah

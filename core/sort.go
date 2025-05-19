@@ -79,7 +79,11 @@ func SetSortField(output *string, input string) {
 	case "4":
 		*output = "lokasi" // Field: Location
 	default:
-		fmt.Println("Pilihan pengurutan tidak valid. Gunakan 1, 2, 3, atau 4.")
+		if SwitchLanguage {
+			fmt.Println("Invalid choice. Use 1 for WasteType, 2 for RecyclingMethod, 3 for Quantity, and 4 for Location.")
+		} else {
+			fmt.Println("Pilihan tidak valid. Gunakan 1 untuk WasteType, 2 untuk RecyclingMethod, 3 untuk Quantity, dan 4 untuk Location.")
+		}
 		*output = ""
 	}
 }
@@ -92,7 +96,11 @@ func SetSortOrder(output *bool, input string) {
 	case "2":
 		*output = false // Descending
 	default:
-		fmt.Println("Pilihan tidak valid. Gunakan 1 untuk Ascending, 2 untuk Descending.")
+		if SwitchLanguage {
+			fmt.Println("Invalid choice. Use 1 for Ascending, 2 for Descending.")
+		} else {
+			fmt.Println("Pilihan tidak valid. Gunakan 1 untuk Ascending, 2 untuk Descending.")
+		}
 	}
 }
 
@@ -104,6 +112,10 @@ func SortByAlgorithm(algorithmChoice string, sortField string, sortAscending boo
 	case "2":
 		InsertionSort(sortField, sortAscending) // Gunakan Insertion Sort
 	default:
-		fmt.Println("Pilihan tidak valid. Gunakan 1 untuk Selection Sort, 2 Insertion Sort.")
+		if SwitchLanguage {
+			fmt.Println("Invalid choice. Use 1 for Selection Sort, 2 for Insertion Sort.")
+		} else {
+			fmt.Println("Pilihan tidak valid. Gunakan 1 untuk Selection Sort, 2 Insertion Sort.")
+		}
 	}
 }
