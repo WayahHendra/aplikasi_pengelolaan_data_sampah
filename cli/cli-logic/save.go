@@ -12,12 +12,20 @@ func SaveWaste(data []core.Waste) {
 
 	var filename, confirmSave string // Variabel untuk nama file dan konfirmasi penyimpanan
 
-	fmt.Print("Masukkan nama file untuk menyimpan data: ")
+	if core.SwitchLanguage {
+		fmt.Print("Enter the name of the file to save data: ")
+	} else {
+		fmt.Print("Masukkan nama file untuk menyimpan data: ")
+	}
 	fmt.Scan(&filename)
 
 	filename = utils.EnsureJSONExtension(filename) // Pastikan nama file memiliki ekstensi .json
 
-	fmt.Print("Yakin ingin save file? (y/n): ")
+	if core.SwitchLanguage {
+		fmt.Print("Are you sure you want to save the file? (y/n): ")
+	} else {
+		fmt.Print("Yakin ingin save file? (y/n): ")
+	}
 	fmt.Scan(&confirmSave)
 
 	// Proses penyimpanan berdasarkan konfirmasi
@@ -27,12 +35,24 @@ func SaveWaste(data []core.Waste) {
 		if err != nil {
 			fmt.Println(err)
 		} else {
-			fmt.Println("Data berhasil disimpan ke", filename)
+			if core.SwitchLanguage {
+				fmt.Print("Data successfully saved to ", filename)
+			} else {
+				fmt.Println("Data berhasil disimpan ke", filename)
+			}
 		}
 	} else if utils.StrToLower(confirmSave) == "no" || utils.StrToLower(confirmSave) == "n" {
-		fmt.Println("Penyimpanan dibatalkan.")
+		if core.SwitchLanguage {
+			fmt.Print("File save canceled.")
+		} else {
+			fmt.Println("Penyimpanan dibatalkan.")
+		}
 	} else {
-		fmt.Println("Input tidak valid!")
+		if core.SwitchLanguage {
+			fmt.Print("Invalid input!")
+		} else {
+			fmt.Println("Input tidak valid!")
+		}
 	}
 
 	utils.PressToContinue()

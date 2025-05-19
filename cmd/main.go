@@ -3,20 +3,42 @@ package main
 import (
 	"fmt"
 	cli_menus "trash-app/cli/cli-menus"
+	"trash-app/core"
 	gui_menus "trash-app/gui/gui-menus"
 	"trash-app/utils"
 )
 
 func main() {
 	var (
-		isGui, input string // Variabel untuk menentukan mode GUI atau CLI dan input pengguna
-		breakLoop    bool   // Penanda untuk keluar dari loop
+		isGui, selectLanguage, menuSelection string // Variabel untuk menyimpan pilihan GUI, bahasa dan menu
+		breakLoop                            bool   // Penanda untuk keluar dari loop
 	)
 
 	utils.ClearConsole()
 
-	// Meminta pengguna memilih mode GUI atau CLI
-	fmt.Print("Tekan y untuk menggunakan GUI dan n untuk CLI: ")
+	fmt.Print("Pilih bahasa (id/en): ")
+	fmt.Scan(&selectLanguage)
+	if utils.StrToLower(selectLanguage) == "en" {
+		// Jika pengguna memilih bahasa Inggris
+		core.SwitchLanguage = true
+		fmt.Println("You have selected English")
+	} else if utils.StrToLower(selectLanguage) == "id" {
+		// Jika pengguna memilih bahasa Indonesia
+		core.SwitchLanguage = false
+		fmt.Println("Anda telah memilih bahasa Indonesia")
+	} else {
+		fmt.Println("ID: Input tidak valid! Silakan pilih bahasa yang benar.")
+		fmt.Println("EN: Invalid input! Please select a valid language.")
+		return
+	}
+
+	fmt.Println()
+
+	if core.SwitchLanguage {
+		fmt.Print("Do you want to use GUI? (y/n): ")
+	} else {
+		fmt.Print("Apakah Anda ingin menggunakan GUI? (y/n): ")
+	}
 	fmt.Scan(&isGui)
 
 	for {
@@ -31,8 +53,8 @@ func main() {
 			breakLoop = false
 			cli_menus.ShowTableMenu()
 
-			fmt.Scan(&input)
-			value, err := utils.ValidateInput(input)
+			fmt.Scan(&menuSelection)
+			value, err := utils.ValidateInput(menuSelection)
 
 			if err != nil {
 				fmt.Println("error:", err)
@@ -44,7 +66,11 @@ func main() {
 				return // Keluar dari program jika breakLoop bernilai true
 			}
 		} else {
-			fmt.Println("input tidak valid!")
+			if core.SwitchLanguage {
+				fmt.Println("Invalid input!")
+			} else {
+				fmt.Println("input tidak valid!")
+			}
 		}
 	}
 }

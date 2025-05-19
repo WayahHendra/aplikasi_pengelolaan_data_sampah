@@ -12,7 +12,11 @@ func LoadWaste(waste *[]core.Waste) {
 
 	var filename string // Nama file yang akan dimuat
 
-	fmt.Print("Masukkan nama file untuk load data: ")
+	if core.SwitchLanguage {
+		fmt.Print("Enter the filename to load data: ")
+	} else {
+		fmt.Print("Masukkan nama file untuk load data: ")
+	}
 	fmt.Scan(&filename)
 
 	filename = utils.EnsureJSONExtension(filename) // Pastikan nama file memiliki ekstensi .json
@@ -24,7 +28,11 @@ func LoadWaste(waste *[]core.Waste) {
 	} else {
 		// Jika berhasil, data dimasukkan ke dalam slice
 		*waste = data
-		fmt.Println("Data berhasil dimuat dari", filename)
+		if core.SwitchLanguage {
+			fmt.Println("Data successfully loaded from", filename)
+		} else {
+			fmt.Println("Data berhasil dimuat dari", filename)
+		}
 	}
 
 	fmt.Println()

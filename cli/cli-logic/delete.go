@@ -17,7 +17,11 @@ func DeleteWaste() {
 
 	// Periksa apakah ada data yang tersedia
 	if len(core.WasteData) == 0 {
-		fmt.Println("Tidak ada data yang tersedia untuk dihapus.")
+		if core.SwitchLanguage {
+			fmt.Println("No data available to delete.")
+		} else {
+			fmt.Println("Tidak ada data yang tersedia untuk dihapus.")
+		}
 		fmt.Println()
 
 		utils.PressToContinue()
@@ -31,14 +35,22 @@ func DeleteWaste() {
 	ReadWaste()                  // Tampilkan data
 	core.TriggerShowData = true  // Aktifkan kembali trigger
 
-	fmt.Print("Masukkan nomor data yang ingin dihapus: ")
+	if core.SwitchLanguage {
+		fmt.Print("Enter the number of the data you want to delete: ")
+	} else {
+		fmt.Print("Masukkan nomor data yang ingin dihapus: ")
+	}
 	fmt.Scan(&index)
 
 	index-- // Konversi nomor ke indeks (dimulai dari 0)
 
 	// Validasi indeks
 	if index < 0 || index >= len(core.WasteData) {
-		fmt.Println("Nomor data tidak valid.")
+		if core.SwitchLanguage {
+			fmt.Println("Invalid data number.")
+		} else {
+			fmt.Println("Nomor data tidak valid.")
+		}
 
 		fmt.Println()
 
@@ -48,7 +60,11 @@ func DeleteWaste() {
 		return
 	}
 
-	fmt.Print("Yakin ingin menghapus data? (y/n): ")
+	if core.SwitchLanguage {
+		fmt.Print("Are you sure you want to delete this data? (y/n): ")
+	} else {
+		fmt.Print("Yakin ingin menghapus data? (y/n): ")
+	}
 	fmt.Scan(&confirmDelete)
 
 	// Proses penghapusan berdasarkan konfirmasi
@@ -57,11 +73,23 @@ func DeleteWaste() {
 
 		utils.ClearConsole()
 
-		fmt.Println("Data berhasil dihapus.")
+		if core.SwitchLanguage {
+			fmt.Println("Data successfully deleted.")
+		} else {
+			fmt.Println("Data berhasil dihapus.")
+		}
 	} else if utils.StrToLower(confirmDelete) == "n" {
-		fmt.Println("Penghapusan data dibatalkan.")
+		if core.SwitchLanguage {
+			fmt.Println("Data deletion canceled.")
+		} else {
+			fmt.Println("Penghapusan data dibatalkan.")
+		}
 	} else {
-		fmt.Println("Input tidak valid!")
+		if core.SwitchLanguage {
+			fmt.Println("Invalid input!")
+		} else {
+			fmt.Println("Input tidak valid!")
+		}
 	}
 
 	fmt.Println()
