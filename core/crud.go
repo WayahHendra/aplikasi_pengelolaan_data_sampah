@@ -1,9 +1,6 @@
 package core
 
-import (
-	"fmt"
-	"trash-app/utils"
-)
+import "fmt"
 
 // CreateData membuat/memperbarui data sampah dengan normalisasi atribut tertentu.
 func CreateData(wasteType string, recyclingMethod string, quantity float64, location string, status string) Waste {
@@ -12,15 +9,15 @@ func CreateData(wasteType string, recyclingMethod string, quantity float64, loca
 	recyclingMethod = RecyclingMethods(recyclingMethod, wasteType) // Normalisasi metode daur ulang berdasarkan jenis sampah
 
 	// Normalisasi status (sudah atau belum didaur ulang)
-	if utils.StrToLower(status) == "yes" || utils.StrToLower(status) == "ye" || utils.StrToLower(status) == "y" || utils.StrToLower(status) == "sudah" {
+	if status == "1" {
 		if SwitchLanguage {
-			status = "Done"
+			status = "Complete"
 		} else {
 			status = "Sudah"
 		}
-	} else if utils.StrToLower(status) == "no" || utils.StrToLower(status) == "n" || utils.StrToLower(status) == "belum" {
+	} else if status == "2" {
 		if SwitchLanguage {
-			status = "Not Done"
+			status = "Incomplete"
 		} else {
 			status = "Belum"
 		}

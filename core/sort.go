@@ -8,7 +8,7 @@ import (
 // SelectionSort mengurutkan data menggunakan algoritma Selection Sort.
 func SelectionSort(sortField string, sortAscending bool) {
 	for i := 0; i < len(WasteData)-1; i++ {
-		minOrMaxIdx := i
+		var minOrMaxIdx int = i
 		for j := i + 1; j < len(WasteData); j++ {
 			// Tentukan elemen minimum/maksimum berdasarkan field yang dipilih
 			switch sortField {
@@ -38,7 +38,7 @@ func SelectionSort(sortField string, sortAscending bool) {
 // InsertionSort mengurutkan data menggunakan algoritma Insertion Sort.
 func InsertionSort(sortField string, sortAscending bool) {
 	for i := 1; i < len(WasteData); i++ {
-		key := WasteData[i]
+		var key Waste = WasteData[i]
 		j := i - 1
 
 		// Geser elemen untuk menemukan posisi yang tepat

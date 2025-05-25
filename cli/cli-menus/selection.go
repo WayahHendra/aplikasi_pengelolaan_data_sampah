@@ -32,40 +32,19 @@ func HandleSelection(value int, breakLoop *bool) {
 		logic.LoadWaste(&core.WasteData) // Muat data dari file
 	case 11:
 		logic.SwitchLanguage() // Ganti bahasa
-	case 12:
-		var exitConfirmation string
-
-		if core.SwitchLanguage {
-			fmt.Print("Do you want to exit the program? (y/n): ")
-		} else {
-			fmt.Print("Apakah Anda ingin keluar dari program? (y/n): ")
-		}
-		fmt.Scan(&exitConfirmation)
-
-		if utils.StrToLower(exitConfirmation) == "yes" || utils.StrToLower(exitConfirmation) == "ye" || utils.StrToLower(exitConfirmation) == "y" {
-			fmt.Println("Exiting the program...")
-			*breakLoop = true // Set breakLoop menjadi true untuk keluar dari loop
-			return
-		} else if utils.StrToLower(exitConfirmation) == "no" || utils.StrToLower(exitConfirmation) == "n" {
-			fmt.Println("Keluar dari program...")
-			*breakLoop = false // Set breakLoop menjadi false untuk tetap di dalam loop
-		} else {
-			if core.SwitchLanguage {
-				fmt.Println("Invalid input! Please select a valid option.")
-			} else {
-				fmt.Println("Input tidak valid! Silakan pilih opsi yang benar.")
-			}
-		}
+	case -1:
+		logic.ExitProgram(breakLoop) // Keluar dari program
 	default:
+		utils.ClearConsole()
+
 		if core.SwitchLanguage {
-			fmt.Println("Selection not valid, please try again.")
+			fmt.Println("Invalid input! Please select a valid menu.")
+			utils.PressToContinue("Press Enter to continue...")
 		} else {
-			fmt.Println("Pilihan tidak valid, coba lagi.")
+			fmt.Println("Input tidak valid! Silakan pilih menu yang benar.")
+			utils.PressToContinue("Tekan Enter untuk melanjutkan...")
 		}
 
-		fmt.Println()
-
-		utils.PressToContinue()
 		utils.ClearConsole()
 	}
 }

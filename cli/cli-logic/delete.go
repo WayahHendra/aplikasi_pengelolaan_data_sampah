@@ -22,9 +22,13 @@ func DeleteWaste() {
 		} else {
 			fmt.Println("Tidak ada data yang tersedia untuk dihapus.")
 		}
-		fmt.Println()
 
-		utils.PressToContinue()
+		if core.SwitchLanguage {
+			utils.PressToContinue("Press Enter to back to the main menu...")
+		} else {
+			utils.PressToContinue("Tekan Enter untuk kembali ke menu utama...")
+		}
+
 		utils.ClearConsole()
 
 		return
@@ -36,11 +40,26 @@ func DeleteWaste() {
 	core.TriggerShowData = true  // Aktifkan kembali trigger
 
 	if core.SwitchLanguage {
-		fmt.Print("Enter the number of the data you want to delete: ")
+		fmt.Println("=========================================")
+		fmt.Println("[-1] Back to main menu [Cancel operation]")
+		fmt.Println("=========================================")
+	} else {
+		fmt.Println("=============================================")
+		fmt.Println("[-1] Kembali ke menu utama [Batalkan operasi]")
+		fmt.Println("=============================================")
+	}
+
+	fmt.Println()
+
+	if core.SwitchLanguage {
+		fmt.Print("Enter the data number you want to delete: ")
 	} else {
 		fmt.Print("Masukkan nomor data yang ingin dihapus: ")
 	}
 	fmt.Scan(&index)
+	if index == -1 {
+		return // Kembali ke menu utama
+	}
 
 	index-- // Konversi nomor ke indeks (dimulai dari 0)
 
@@ -54,18 +73,25 @@ func DeleteWaste() {
 
 		fmt.Println()
 
-		utils.PressToContinue()
+		if core.SwitchLanguage {
+			utils.PressToContinue("Press Enter to continue...")
+		} else {
+			utils.PressToContinue("Tekan Enter untuk melanjutkan...")
+		}
 		utils.ClearConsole()
 
 		return
 	}
 
 	if core.SwitchLanguage {
-		fmt.Print("Are you sure you want to delete this data? (y/n): ")
+		fmt.Print("Are you sure you want to delete this data? [y/n]: ")
 	} else {
-		fmt.Print("Yakin ingin menghapus data? (y/n): ")
+		fmt.Print("Yakin ingin menghapus data? [y/n]: ")
 	}
 	fmt.Scan(&confirmDelete)
+	if confirmDelete == "-1" {
+		return // Kembali ke menu utama
+	}
 
 	// Proses penghapusan berdasarkan konfirmasi
 	if utils.StrToLower(confirmDelete) == "y" {
@@ -94,6 +120,11 @@ func DeleteWaste() {
 
 	fmt.Println()
 
-	utils.PressToContinue()
+	if core.SwitchLanguage {
+		utils.PressToContinue("Press Enter to back to the main menu...")
+	} else {
+		utils.PressToContinue("Tekan Enter untuk kembali ke menu utama...")
+	}
+
 	utils.ClearConsole()
 }

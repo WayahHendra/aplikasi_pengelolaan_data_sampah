@@ -37,6 +37,10 @@ func LoadWaste(waste *[]core.Waste) {
 
 	fmt.Println()
 
-	utils.PressToContinue()
+	if core.SwitchLanguage {
+		utils.PressToContinue("Press Enter to continue... ")
+	} else {
+		utils.PressToContinue("Tekan Enter untuk melanjutkan... ")
+	}
 	utils.ClearConsole()
 }

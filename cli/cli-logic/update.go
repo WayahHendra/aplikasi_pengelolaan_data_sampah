@@ -51,7 +51,11 @@ func UpdateWaste() {
 
 		fmt.Println()
 
-		utils.PressToContinue()
+		if core.SwitchLanguage {
+			utils.PressToContinue("Press Enter to continue... ")
+		} else {
+			utils.PressToContinue("Tekan Enter untuk melanjutkan... ")
+		}
 		utils.ClearConsole()
 
 		return
@@ -146,6 +150,10 @@ func UpdateWaste() {
 
 	fmt.Println()
 
-	utils.PressToContinue()
+	if core.SwitchLanguage {
+		utils.PressToContinue("Press Enter to continue... ")
+	} else {
+		utils.PressToContinue("Tekan Enter untuk melanjutkan... ")
+	}
 	utils.ClearConsole()
 }
