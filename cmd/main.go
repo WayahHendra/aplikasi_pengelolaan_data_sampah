@@ -4,25 +4,29 @@ import (
 	"fmt"
 	cli_menus "trash-app/cli/cli-menus"
 	"trash-app/core"
-	gui_menus "trash-app/gui/gui-menus"
+	"trash-app/gui"
 	"trash-app/utils"
 )
 
 func main() {
 	var (
-		isGui, selectLanguage, menuSelection string // Variabel untuk menyimpan pilihan GUI, bahasa dan menu
-		breakLoop                            bool   // Penanda untuk keluar dari loop
+		menuSelection         int    // Variabel untuk menyimpan pilihan menu
+		isGui, selectLanguage string // Variabel untuk menyimpan pilihan GUI dan bahasa
+		breakLoop             bool   // Penanda untuk keluar dari loop
 	)
 
 	utils.ClearConsole()
 
-	fmt.Print("Pilih bahasa (id/en): ")
+	fmt.Println("Pilih bahasa:")
+	fmt.Println("[1] English")
+	fmt.Println("[2] Indonesia")
+	fmt.Print("Pilih bahasa [1/2]: ")
 	fmt.Scan(&selectLanguage)
-	if utils.StrToLower(selectLanguage) == "en" {
+	if selectLanguage == "1" {
 		// Jika pengguna memilih bahasa Inggris
 		core.SwitchLanguage = true
 		fmt.Println("You have selected English")
-	} else if utils.StrToLower(selectLanguage) == "id" {
+	} else if selectLanguage == "2" {
 		// Jika pengguna memilih bahasa Indonesia
 		core.SwitchLanguage = false
 		fmt.Println("Anda telah memilih bahasa Indonesia")
@@ -32,36 +36,36 @@ func main() {
 		return
 	}
 
-	fmt.Println()
+	utils.ClearConsole()
 
 	if core.SwitchLanguage {
-		fmt.Print("Do you want to use GUI? (y/n): ")
+		fmt.Println("Do you want to use GUI?")
+		fmt.Println("[1] Yes [not implemented yet!]")
+		fmt.Println("[2] No")
+		fmt.Print("Select mode [1/2]: ")
 	} else {
-		fmt.Print("Apakah Anda ingin menggunakan GUI? (y/n): ")
+		fmt.Println("Apakah Anda ingin menggunakan GUI?")
+		fmt.Println("[1] Ya [belum diimplementasikan!]")
+		fmt.Println("[2] Tidak")
+		fmt.Print("Pilih mode [1/2]: ")
 	}
 	fmt.Scan(&isGui)
 
 	for {
 		utils.ClearConsole()
 
-		if utils.StrToLower(isGui) == "yes" || utils.StrToLower(isGui) == "ye" || utils.StrToLower(isGui) == "y" {
+		if isGui == "1" {
 			// Jika pengguna memilih GUI
-			gui_menus.RunGUI()
+			gui.RunGUI()
 			return
-		} else if utils.StrToLower(isGui) == "no" || utils.StrToLower(isGui) == "n" {
+		} else if isGui == "2" {
 			// Jika pengguna memilih CLI
 			breakLoop = false
 			cli_menus.ShowTableMenu()
 
 			fmt.Scan(&menuSelection)
-			value, err := utils.ValidateInput(menuSelection)
 
-			if err != nil {
-				fmt.Println("error:", err)
-				return
-			}
-
-			cli_menus.HandleSelection(value, &breakLoop)
+			cli_menus.HandleSelection(menuSelection, &breakLoop)
 			if breakLoop {
 				return // Keluar dari program jika breakLoop bernilai true
 			}

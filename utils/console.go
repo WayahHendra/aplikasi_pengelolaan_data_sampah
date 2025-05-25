@@ -8,13 +8,15 @@ import (
 	"runtime"
 )
 
-func PressToContinue() {
+// PressToContinue menunggu input dari pengguna sebelum melanjutkan.
+func PressToContinue(text string) {
 	reader := bufio.NewReader(os.Stdin)
 	reader.ReadString('\n')
-	fmt.Println("Press ENTER to continue...")
+	fmt.Print(text)
 	bufio.NewReader(os.Stdin).ReadString('\n')
 }
 
+// ClearConsole membersihkan layar konsol.
 func ClearConsole() {
 	switch runtime.GOOS {
 	case "windows":
