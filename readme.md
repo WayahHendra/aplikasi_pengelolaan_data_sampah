@@ -95,6 +95,7 @@ trash-app
 │   │   │   └── waste.routers.go
 │   │   └── service/
 │   │       └── waste.services.go
+│   └── gui.main.go  
 │   └── gui.main.go
 ├── utils/
 │   ├── console.go
