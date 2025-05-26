@@ -4,7 +4,7 @@
 Trash App adalah aplikasi berbasis CLI dan GUI yang dirancang untuk membantu pengelolaan data sampah, termasuk menambah, membaca, mengubah, menghapus, mencari, mengurutkan, mengganti bahasa, dan menyimpan data sampah. Aplikasi ini bertujuan untuk meningkatkan kesadaran akan pengelolaan sampah yang lebih baik.
 
 ## Features
-- **GUI Placeholder**: GUI belum diimplementasikan, tetapi tersedia sebagai placeholder.
+- **GUI Placeholder**: GUI belum diimplementasikan, sedang dalam tahap pengembangan!.
 - **CLI Menu**: Menyediakan berbagai fitur seperti CRUD, pencarian, pengurutan, dan lainnya.
 - **Pengelolaan Data Sampah**: Mendukung berbagai jenis sampah dan metode daur ulang.
 - **Pemilihan Bahasa**: Pengguna dapat mengganti ke bahasa Inggris maupun bahasa Indonesia.
@@ -35,11 +35,11 @@ Trash App adalah aplikasi berbasis CLI dan GUI yang dirancang untuk membantu pen
 
 ## Usage
 Saat menjalankan aplikasi, Anda akan diminta untuk memilih mode:
-- **GUI Mode**: Tekan `y` (placeholder, belum diimplementasikan).
+- **GUI Mode**: Tekan `y` (placeholder, belum diimplementasikan (development)).
 - **CLI Mode**: Tekan `n` untuk menggunakan mode CLI.
 
 ### GUI Menu
-GUI belum diimplementasikan!
+GUI dalam tahap pengembangan!
 
 ### CLI Menu
 Berikut adalah daftar menu yang tersedia di mode CLI:
@@ -86,7 +86,16 @@ trash-app
 │   ├── sort.go
 │   └── storage.go
 ├── gui/
-│   └── menu.go
+│   ├── api/
+│   │   ├── controller/
+│   │   │   └── waste.controllers.go
+│   │   ├── module/
+│   │   │   └── waste.modules.go
+│   │   ├── router/
+│   │   │   └── waste.routers.go
+│   │   └── service/
+│   │       └── waste.services.go
+│   └── gui.main.go
 ├── utils/
 │   ├── console.go
 │   └── stringutil.go
