@@ -10,55 +10,59 @@ import (
 func SaveWaste(data []core.Waste) {
 	utils.ClearConsole()
 
-	var filename, confirmSave string // Variabel untuk nama file dan konfirmasi penyimpanan
+	var confirmSave string // Variabel untuk konfirmasi penyimpanan
 
 	if core.SwitchLanguage {
-		fmt.Print("Enter the name of the file to save data: ")
+		fmt.Print("Are you sure you want to save the file? [1] Yes, [2] No: ")
 	} else {
-		fmt.Print("Masukkan nama file untuk menyimpan data: ")
-	}
-	fmt.Scan(&filename)
-
-	filename = utils.EnsureJSONExtension(filename) // Pastikan nama file memiliki ekstensi .json
-
-	if core.SwitchLanguage {
-		fmt.Print("Are you sure you want to save the file? (y/n): ")
-	} else {
-		fmt.Print("Yakin ingin save file? (y/n): ")
+		fmt.Print("Yakin ingin save file? [1] Ya, [2] Tidak: ")
 	}
 	fmt.Scan(&confirmSave)
 
 	// Proses penyimpanan berdasarkan konfirmasi
-	if utils.StrToLower(confirmSave) == "yes" || utils.StrToLower(confirmSave) == "ye" || utils.StrToLower(confirmSave) == "y" {
+	if confirmSave == "1" {
+		var (
+			filename string
+			err      error
+		)
+
+		// Gunakan FormatingSaveData untuk membuat nama file
+		filename = utils.FormatingSaveData()
+
 		// Simpan data ke file
-		err := core.SaveWasteToFile(filename, data)
+		err = core.SaveWasteToFile(filename, data)
 		if err != nil {
 			fmt.Println(err)
 		} else {
 			if core.SwitchLanguage {
-				fmt.Print("Data successfully saved to ", filename)
+				fmt.Println("Data successfully saved to", filename)
 			} else {
 				fmt.Println("Data berhasil disimpan ke", filename)
 			}
 		}
-	} else if utils.StrToLower(confirmSave) == "no" || utils.StrToLower(confirmSave) == "n" {
+	} else if confirmSave == "2" {
+		fmt.Println()
+
 		if core.SwitchLanguage {
-			fmt.Print("File save canceled.")
+			fmt.Println("File save canceled.")
 		} else {
 			fmt.Println("Penyimpanan dibatalkan.")
 		}
 	} else {
+		fmt.Println()
+
 		if core.SwitchLanguage {
-			fmt.Print("Invalid input!")
+			fmt.Println("Invalid input!")
 		} else {
 			fmt.Println("Input tidak valid!")
 		}
 	}
 
 	if core.SwitchLanguage {
-		utils.PressToContinue("Press Enter to continue... ")
+		utils.PressToContinue("Press Enter to continue...")
 	} else {
-		utils.PressToContinue("Tekan Enter untuk melanjutkan... ")
+		utils.PressToContinue("Tekan Enter untuk melanjutkan...")
 	}
+
 	utils.ClearConsole()
 }

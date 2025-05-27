@@ -34,27 +34,27 @@ Trash App adalah aplikasi berbasis CLI dan GUI yang dirancang untuk membantu pen
 3. Ikuti petunjuk di terminal untuk memilih mode dan menggunakan aplikasi.
 
 ## Usage
-Saat menjalankan aplikasi, Anda akan diminta untuk memilih mode:
-- **GUI Mode**: Tekan `y` (placeholder, belum diimplementasikan (development)).
-- **CLI Mode**: Tekan `n` untuk menggunakan mode CLI.
+Saat menjalankan aplikasi, Anda akan diminta untuk memilih bahasa dan mode:
+1. Bahasa Indonesia / Bahasa Inggris
+2. Mode GUI / Mode CLI
 
 ### GUI Menu
 GUI dalam tahap pengembangan!
 
 ### CLI Menu
 Berikut adalah daftar menu yang tersedia di mode CLI:
-[1] Tambah data
-[2] Tampilkan semua data
-[3] Ubah data
-[4] Hapus data
-[5] Cari data -> Not Implemented yet!
-[6] Urutkan data
-[7] Catat proses daur ulang -> Not Implemented yet!
-[8] Tampilkan statistik -> Not Implemented yet!
-[9] Simpan data -> Bug
-[10] Muat data -> Bug
-[11] Ganti bahasa
-[-1] Keluar program
+1. Tambah data
+2. Tampilkan semua data
+3. Ubah data
+4. Hapus data
+5. Cari data -> Not Implemented yet!
+6. Urutkan data
+7. Catat proses daur ulang -> Not Implemented yet!
+8. Tampilkan statistik -> Not Implemented yet!
+9. Simpan data -> Bug
+10. Muat data -> Bug
+11. Ganti bahasa
+12. Keluar program
 
 ## Project Structure
 ```
