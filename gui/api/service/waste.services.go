@@ -21,7 +21,7 @@ func NewTrashServices() *TrashServices {
 	if _, err := os.Stat(dataFolder); os.IsNotExist(err) {
 		os.Mkdir(dataFolder, 0755)
 	}
-	
+
 	today := time.Now()
 	filename := fmt.Sprintf("%02d-%02d-%04d.json",
 		today.Day(),
@@ -50,12 +50,12 @@ func (s *TrashServices) CreateWaste(newWaste core.Waste) error {
 			return err
 		}
 	}
-	
+
 	wasteData = append(wasteData, newWaste)
 	err = core.SaveWasteToFile(s.file, wasteData)
 	if err != nil {
 		return err
-	} 
+	}
 
 	return nil
 }

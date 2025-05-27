@@ -20,12 +20,10 @@ func ReadWaste() {
 			fmt.Println("Belum ada data sampah yang tersedia.")
 		}
 
-		fmt.Println()
-
 		if core.SwitchLanguage {
-			utils.PressToContinue("Press Enter to continue... ")
+			utils.PressToContinue("Press Enter to return to the main menu...")
 		} else {
-			utils.PressToContinue("Tekan Enter untuk melanjutkan... ")
+			utils.PressToContinue("Tekan Enter untuk kembali ke menu utama...")
 		}
 		utils.ClearConsole()
 
@@ -53,9 +51,9 @@ func ReadWaste() {
 	// Jika trigger aktif, tunggu input untuk melanjutkan dan bersihkan layar
 	if core.TriggerShowData {
 		if core.SwitchLanguage {
-			utils.PressToContinue("Press Enter to continue... ")
+			utils.PressToContinue("Press Enter to return to the main menu...")
 		} else {
-			utils.PressToContinue("Tekan Enter untuk melanjutkan... ")
+			utils.PressToContinue("Tekan Enter untuk kembali ke menu utama...")
 		}
 		utils.ClearConsole()
 	}

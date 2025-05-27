@@ -1,6 +1,11 @@
 package utils
 
-import "strings"
+import (
+	"fmt"
+	"os"
+	"strings"
+	"time"
+)
 
 // Contains memeriksa apakah substring ada dalam string.
 func Contains(str, substr string) bool {
@@ -23,4 +28,24 @@ func EnsureJSONExtension(filename string) string {
 		return filename + ".json"
 	}
 	return filename
+}
+
+// FormatingSaveData membuat nama file berdasarkan tanggal saat ini dan memastikan folder data ada.
+func FormatingSaveData() string {
+	var dataFolder, file string = "../data", ""
+
+	if _, err := os.Stat(dataFolder); os.IsNotExist(err) {
+		os.Mkdir(dataFolder, 0755)
+	}
+
+	today := time.Now()
+	filename := fmt.Sprintf("%02d-%02d-%04d.json",
+		today.Day(),
+		today.Month(),
+		today.Year(),
+	)
+
+	file = dataFolder + "/" + filename
+
+	return file
 }

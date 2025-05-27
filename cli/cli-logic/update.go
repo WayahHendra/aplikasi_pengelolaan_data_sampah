@@ -29,8 +29,20 @@ func UpdateWaste() {
 
 	// Validasi apakah ada data yang tersedia
 	if len(core.WasteData) == 0 {
-		return
+		return // Jika tidak ada data, keluar dari fungsi
 	}
+
+	if core.SwitchLanguage {
+		fmt.Println("=========================================")
+		fmt.Println("[-1] Back to main menu [Cancel operation]")
+		fmt.Println("=========================================")
+	} else {
+		fmt.Println("=============================================")
+		fmt.Println("[-1] Kembali ke menu utama [Batalkan operasi]")
+		fmt.Println("=============================================")
+	}
+
+	fmt.Println()
 
 	if core.SwitchLanguage {
 		fmt.Print("Enter the number of the data you want to update: ")
@@ -38,37 +50,46 @@ func UpdateWaste() {
 		fmt.Print("Masukkan nomor data yang ingin diubah: ")
 	}
 	fmt.Scan(&index)
+	if index == -1 {
+		return // Kembali ke menu utama
+	}
 
 	index-- // Ubah ke indeks berbasis 0
 
+	fmt.Println()
+
 	// Validasi indeks
 	if index < 0 || index >= len(core.WasteData) {
-		if core.SwitchLanguage {
-			fmt.Println("Invalid data number.")
-		} else {
-			fmt.Println("Nomor data tidak valid.")
-		}
-
-		fmt.Println()
-
-		if core.SwitchLanguage {
-			utils.PressToContinue("Press Enter to continue... ")
-		} else {
-			utils.PressToContinue("Tekan Enter untuk melanjutkan... ")
-		}
 		utils.ClearConsole()
 
-		return
+		if core.SwitchLanguage {
+			fmt.Println("Invalid data number. Try again.")
+		} else {
+			fmt.Println("Nomor data tidak valid. Coba lagi.")
+		}
+
+		if core.SwitchLanguage {
+			utils.PressToContinue("Press Enter to continue...")
+		} else {
+			utils.PressToContinue("Tekan Enter untuk melanjutkan...")
+		}
+
+		UpdateWaste() // Panggil kembali fungsi UpdateWaste untuk mencoba lagi
 	}
+
+	utils.ClearConsole()
 
 	if core.SwitchLanguage {
-		fmt.Print("Are you sure you want to update the data? (y/n): ")
+		fmt.Print("Are you sure you want to update the data? [1] Yes, [2] No: ")
 	} else {
-		fmt.Print("Yakin ingin mengubah data? (y/n): ")
+		fmt.Print("Yakin ingin mengubah data? [1] Ya, [2] Tidak: ")
 	}
 	fmt.Scan(&confirmUpdate)
+	if confirmUpdate == "-1" {
+		return // Kembali ke menu utama
+	}
 
-	if utils.StrToLower(confirmUpdate) == "y" {
+	if confirmUpdate == "1" {
 		utils.ClearConsole()
 
 		core.ShowRecycleTypeTable() // Menampilkan jenis-jenis sampah daur ulang
@@ -92,39 +113,54 @@ func UpdateWaste() {
 		fmt.Println()
 
 		if core.SwitchLanguage {
-			fmt.Print("Enter the type of waste: ")
+			fmt.Print("Enter waste type: ")
 		} else {
 			fmt.Print("Masukkan jenis sampah: ")
 		}
 		fmt.Scan(&wasteType)
+		if wasteType == "-1" {
+			return // Kembali ke menu utama
+		}
 
 		if core.SwitchLanguage {
-			fmt.Print("Enter the recycling method: ")
+			fmt.Print("Enter recycling method: ")
 		} else {
-			fmt.Print("Masukkan metode daur ulang sampah: ")
+			fmt.Print("Masukkan metode daur ulang: ")
 		}
 		fmt.Scan(&recyclingMethod)
+		if recyclingMethod == "-1" {
+			return // Kembali ke menu utama
+		}
 
 		if core.SwitchLanguage {
-			fmt.Print("Enter the amount of waste (kg): ")
+			fmt.Print("Enter waste quantity [kg]: ")
 		} else {
-			fmt.Print("Masukkan jumlah sampah (kg): ")
+			fmt.Print("Masukkan jumlah sampah [kg]: ")
 		}
 		fmt.Scan(&quantity)
+		if quantity == -1 {
+			return // Kembali ke menu utama
+		}
 
 		if core.SwitchLanguage {
-			fmt.Print("Enter the collection location: ")
+			fmt.Print("Enter collection location: ")
 		} else {
 			fmt.Print("Masukkan lokasi pengumpulan: ")
 		}
 		fmt.Scan(&location)
+		if location == "-1" {
+			return // Kembali ke menu utama
+		}
 
 		if core.SwitchLanguage {
-			fmt.Print("Enter the recycling status (y/n): ")
+			fmt.Print("Enter recicling status. [1] Complete, [2] Incomplete: ")
 		} else {
-			fmt.Print("Masukkan status daur ulang (y/n): ")
+			fmt.Print("Masukkan status daur ulang. [1] Sudah, [2] Belum: ")
 		}
 		fmt.Scan(&status)
+		if status == "-1" {
+			return // Kembali ke menu utama
+		}
 
 		// Gunakan core.CreateData untuk normalisasi dan validasi data baru
 		core.WasteData[index] = core.CreateData(wasteType, recyclingMethod, quantity, location, status)
@@ -134,13 +170,17 @@ func UpdateWaste() {
 		} else {
 			fmt.Println("Data berhasil diubah.")
 		}
-	} else if utils.StrToLower(confirmUpdate) == "n" {
+	} else if confirmUpdate == "2" {
+		fmt.Println()
+
 		if core.SwitchLanguage {
 			fmt.Println("Failed to update data.")
 		} else {
 			fmt.Println("Gagal mengubah data.")
 		}
 	} else {
+		fmt.Println()
+
 		if core.SwitchLanguage {
 			fmt.Println("Invalid input!")
 		} else {
@@ -148,12 +188,11 @@ func UpdateWaste() {
 		}
 	}
 
-	fmt.Println()
-
 	if core.SwitchLanguage {
-		utils.PressToContinue("Press Enter to continue... ")
+		utils.PressToContinue("Press Enter to return to the main menu...")
 	} else {
-		utils.PressToContinue("Tekan Enter untuk melanjutkan... ")
+		utils.PressToContinue("Tekan Enter untuk melanjutkan...")
 	}
+
 	utils.ClearConsole()
 }

@@ -28,6 +28,9 @@ func LoadWaste(waste *[]core.Waste) {
 	} else {
 		// Jika berhasil, data dimasukkan ke dalam slice
 		*waste = data
+
+		fmt.Println()
+
 		if core.SwitchLanguage {
 			fmt.Println("Data successfully loaded from", filename)
 		} else {
@@ -35,12 +38,11 @@ func LoadWaste(waste *[]core.Waste) {
 		}
 	}
 
-	fmt.Println()
-
 	if core.SwitchLanguage {
-		utils.PressToContinue("Press Enter to continue... ")
+		utils.PressToContinue("Press Enter to return to the main menu...")
 	} else {
-		utils.PressToContinue("Tekan Enter untuk melanjutkan... ")
+		utils.PressToContinue("Tekan Enter untuk kembali ke menu utama...")
 	}
+
 	utils.ClearConsole()
 }

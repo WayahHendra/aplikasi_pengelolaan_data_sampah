@@ -105,20 +105,22 @@ func DeleteWaste() {
 			fmt.Println("Data berhasil dihapus.")
 		}
 	} else if utils.StrToLower(confirmDelete) == "n" {
+		fmt.Println()
+
 		if core.SwitchLanguage {
 			fmt.Println("Data deletion canceled.")
 		} else {
 			fmt.Println("Penghapusan data dibatalkan.")
 		}
 	} else {
+		fmt.Println()
+
 		if core.SwitchLanguage {
 			fmt.Println("Invalid input!")
 		} else {
 			fmt.Println("Input tidak valid!")
 		}
 	}
-
-	fmt.Println()
 
 	if core.SwitchLanguage {
 		utils.PressToContinue("Press Enter to back to the main menu...")
