@@ -15,7 +15,7 @@ func SaveWaste(data []core.Waste) {
 	if core.SwitchLanguage {
 		fmt.Print("Are you sure you want to save the file? [1] Yes, [2] No: ")
 	} else {
-		fmt.Print("Yakin ingin save file? [1] Ya, [2] Tidak: ")
+		fmt.Print("Yakin ingin menyimpan file? [1] Ya, [2] Tidak: ")
 	}
 	fmt.Scan(&confirmSave)
 
