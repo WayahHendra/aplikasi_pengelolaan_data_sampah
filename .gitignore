@@ -2,4 +2,6 @@
 
 # json data
 /data
-*.json
+
+# testing
+/coverage

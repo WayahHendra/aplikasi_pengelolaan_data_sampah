@@ -1,11 +1,11 @@
 package controllers
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
-	"encoding/json"
 	"trash-app/core"
-	"trash-app/gui/api/service"
+	services "trash-app/gui/api/service"
 )
 
 type TrashControllers struct {
@@ -24,7 +24,7 @@ func (c *TrashControllers) CreateWaste(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 
 		json.NewEncoder(w).Encode(map[string]string{
-			"status": "error",
+			"status":  "error",
 			"message": "Method not allowed",
 		})
 
@@ -38,7 +38,7 @@ func (c *TrashControllers) CreateWaste(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 
 		json.NewEncoder(w).Encode(map[string]string{
-			"status": "error",
+			"status":  "error",
 			"message": "Invalid JSON format",
 		})
 
@@ -51,10 +51,10 @@ func (c *TrashControllers) CreateWaste(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 
 		json.NewEncoder(w).Encode(map[string]string{
-			"status": "error",
-			"message": "Something went wrong!",
+			"status":  "error",
+			"message": "Method not allowed",
 		})
-		
+
 		return
 	}
 
@@ -62,7 +62,61 @@ func (c *TrashControllers) CreateWaste(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 
 	json.NewEncoder(w).Encode(map[string]string{
+		"status":  "success",
 		"message": "Trash data added successfully",
-		"status": "success",
 	})
+
+	w.Header().Set("Content-Type", "application/json")
+}
+
+func (c *TrashControllers) GetAllWaste(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		log.Println("Method not allowed on /waste request")
+		w.WriteHeader(http.StatusMethodNotAllowed)
+
+		json.NewEncoder(w).Encode(map[string]string{
+			"status":  "error",
+			"message": "Method not allowed",
+		})
+
+		return
+	}	
+
+	wasteData, err := c.service.GetAllWaste()
+	if err != nil {
+		log.Println(err.Error() + " on /waste request")
+		w.WriteHeader(http.StatusInternalServerError)
+
+		json.NewEncoder(w).Encode(map[string]string{
+			"status":  "error",
+			"message": "Method not allowed",
+		})
+
+		return
+	}
+
+	log.Println("Trash data retrieved successfully on /waste request")
+	w.WriteHeader(http.StatusOK)
+
+	wasteDataJSON, err := json.Marshal(wasteData)
+
+	if err != nil {
+		log.Println(err.Error() + " on /waste request")
+		w.WriteHeader(http.StatusInternalServerError)
+
+		json.NewEncoder(w).Encode(map[string]string{
+			"status":  "error",
+			"message": "Method not allowed",
+		})
+
+		return
+	}
+
+	json.NewEncoder(w).Encode(map[string]string{
+		"status":  "success",
+		"message": "Trash data retrieved successfully on /waste request",
+		"data":    string(wasteDataJSON),
+	})
+
+	w.Header().Set("Content-Type", "application/json")
 }
