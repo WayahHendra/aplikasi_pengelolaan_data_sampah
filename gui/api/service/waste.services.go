@@ -102,3 +102,34 @@ func (s *TrashServices) GetAllWaste() ([]core.Waste, error) {
 
     return allWaste, nil
 }
+
+func (s *TrashServices) GetWasteByDate(date string) ([]core.Waste, error) {
+	var dataFolder string = "../data/"
+    var allWaste []core.Waste
+
+    s.mu.Lock()
+    defer s.mu.Unlock()
+
+    // Siapkan nama file berdasarkan input tanggal
+    filename := dataFolder + date + ".json"
+    filename = utils.EnsureJSONExtension(filename)
+
+    fileContent, err := os.ReadFile(filename)
+    if err != nil {
+        return nil, fmt.Errorf("failed to read file %s: %w", filename, err)
+    }
+
+    if err := json.Unmarshal(fileContent, &allWaste); err != nil {
+        return nil, fmt.Errorf("failed to unmarshal file %s: %w", filename, err)
+    }
+
+    return allWaste, nil
+}
+
+func (s *TrashServices) UpdateWaste(waste core.Waste) error {
+	return nil
+}
+
+func (s *TrashServices) DeleteWaste(id string) error {
+	return nil
+}
