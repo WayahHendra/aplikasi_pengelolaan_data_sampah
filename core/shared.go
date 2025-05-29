@@ -52,120 +52,61 @@ func ShowRecycleTypeTable() {
 
 // GarbageTypes mengembalikan jenis sampah berdasarkan input pengguna.
 func GarbageTypes(input string) string {
-	if SwitchLanguage {
-		switch utils.StrToLower(input) {
-		case "1", "o", "or", "org", "orga", "organ", "organi", "organic":
-			return "Organic"
-		case "2", "i", "in", "ino", "inor", "inorg", "inorga", "inorgan", "inorgani", "inorganic":
-			return "Inorganic"
-		case "3", "b", "b3":
-			return "B3"
-		default:
-			return "nil"
-		}
-	} else {
-		switch utils.StrToLower(input) {
-		case "1", "o", "or", "org", "orga", "organ", "organi", "organik":
-			return "Organik"
-		case "2", "a", "an", "ano", "anor", "anorg", "anorga", "anorgan", "anorgani", "anorganik":
-			return "Anorganik"
-		case "3", "b", "b3":
-			return "B3"
-		default:
-			return "nil"
-		}
+	switch utils.StrToLower(input) {
+	case "1", "organic":
+		return "Organic"
+	case "2", "inorganic":
+		return "Inorganic"
+	case "3", "b3":
+		return "B3"
+	default:
+		return "nil"
 	}
 }
 
 // RecyclingMethods mengembalikan metode daur ulang berdasarkan input dan jenis sampah.
 func RecyclingMethods(input, wasteType string) string {
-	if SwitchLanguage {
-		switch wasteType {
-		case "Organic":
-			switch utils.StrToLower(input) {
-			case "1", "c", "co", "com", "comp", "compo", "compos", "compost":
-				return "Compost"
-			case "2", "b", "bi", "bio", "biog", "bioga", "biogas":
-				return "Biogas"
-			case "3", "bs", "bsf":
-				return "BSF"
-			default:
-				return "nil"
-			}
-		case "Inorganik":
-			switch utils.StrToLower(input) {
-			case "1", "m", "me", "mel", "melt", "melti", "meltin", "melting":
-				return "Melting"
-			case "2", "r", "re", "reu", "reus", "reuse":
-				return "Reuse"
-			case "3", "d", "do", "dow", "down", "downc", "downcy", "downcyc", "downcycl", "downcycli", "downcyclin", "downcycling":
-				return "Downcycling"
-			case "4", "u", "up", "upc", "upcy", "upcyc", "upcycl", "upcycli", "upcyclin", "upcycling":
-				return "Upcycling"
-			case "5", "e", "ec", "eco", "ecob", "ecobr", "ecobri", "ecobric", "ecobrick", "ecobricks":
-				return "Ecobricks"
-			default:
-				return "nil"
-			}
-		case "B3":
-			switch utils.StrToLower(input) {
-			case "1", "i", "in", "inc", "inci", "incin", "incine", "inciner", "incinera", "incinerat", "incinerati", "incineratio", "incineration":
-				return "Incineration"
-			case "2", "s", "st", "sta", "stab", "stabi", "stabil", "stabili", "stabiliz", "stabiliza", "stabilizat", "stabilizati", "stabilizatio", "stabilization":
-				return "Stabilization"
-			case "3", "e", "el", "ele", "elec", "elect", "electr", "electro", "electron", "electroni", "electronic", "electronics":
-				return "Electronics"
-			case "4", "c", "ch", "che", "chem", "chemi", "chemic", "chemica", "chemical":
-				return "Chemical"
-			default:
-				return "nil"
-			}
+	switch wasteType {
+	case "Organic":
+		switch utils.StrToLower(input) {
+		case "1", "compost":
+			return "Compost"
+		case "2", "biogas":
+			return "Biogas"
+		case "3", "bsf":
+			return "BSF"
 		default:
 			return "nil"
 		}
-	} else {
-		switch wasteType {
-		case "Organik":
-			switch utils.StrToLower(input) {
-			case "1", "k", "ko", "kom", "komp", "kompo", "kompos":
-				return "Kompos"
-			case "2", "b", "bi", "bio", "biog", "bioga", "biogas":
-				return "Biogas"
-			case "3", "bs", "bsf":
-				return "BSF"
-			default:
-				return "nil"
-			}
-		case "Anorganik":
-			switch utils.StrToLower(input) {
-			case "1", "p", "pe", "pel", "pele", "peleb", "pelebu", "pelebur", "pelebura", "peleburan":
-				return "Peleburan"
-			case "2", "r", "re", "reu", "reus", "reuse":
-				return "Reuse"
-			case "3", "d", "do", "dow", "down", "downc", "downcy", "downcyc", "downcycl", "downcycli", "downcyclin", "downcycling":
-				return "Downcycling"
-			case "4", "u", "up", "upc", "upcy", "upcyc", "upcycl", "upcycli", "upcyclin", "upcycling":
-				return "Upcycling"
-			case "5", "e", "ec", "eco", "ecob", "ecobr", "ecobri", "ecobric", "ecobrick", "ecobricks":
-				return "Ecobricks"
-			default:
-				return "nil"
-			}
-		case "B3":
-			switch utils.StrToLower(input) {
-			case "1", "i", "in", "ins", "insi", "insin", "insine", "insiner", "insinera", "insineras", "insinerasi":
-				return "Insinerasi"
-			case "2", "s", "st", "sta", "stab", "stabi", "stabil", "stabili", "stabilis", "stabilisa", "stabilisas", "stabilisasi":
-				return "Stabilisasi"
-			case "3", "e", "el", "ele", "elek", "elekt", "elektr", "elektro", "elektron", "elektroni", "elektronik":
-				return "Elektronik"
-			case "4", "k", "ki", "kim", "kimi", "kimia":
-				return "Kimia"
-			default:
-				return "nil"
-			}
+	case "Inorganic":
+		switch utils.StrToLower(input) {
+		case "1", "melting":
+			return "Melting"
+		case "2", "reuse":
+			return "Reuse"
+		case "3", "downcycling":
+			return "Downcycling"
+		case "4", "upcycling":
+			return "Upcycling"
+		case "5", "ecobricks":
+			return "Ecobricks"
 		default:
 			return "nil"
 		}
+	case "B3":
+		switch utils.StrToLower(input) {
+		case "1", "incineration":
+			return "Incineration"
+		case "2", "stabilization":
+			return "Stabilization"
+		case "3", "electronics":
+			return "Electronics"
+		case "4", "chemical":
+			return "Chemical"
+		default:
+			return "nil"
+		}
+	default:
+		return "nil"
 	}
 }

@@ -32,7 +32,7 @@ func EnsureJSONExtension(filename string) string {
 
 // FormatingSaveData membuat nama file berdasarkan tanggal saat ini dan memastikan folder data ada.
 func FormatingSaveData() string {
-	var dataFolder, file string = "../data", ""
+	var dataFolder, file string = "../data/", ""
 
 	if _, err := os.Stat(dataFolder); os.IsNotExist(err) {
 		os.Mkdir(dataFolder, 0755)
@@ -45,7 +45,7 @@ func FormatingSaveData() string {
 		today.Year(),
 	)
 
-	file = dataFolder + "/" + filename
+	file = dataFolder + filename
 
 	return file
 }
