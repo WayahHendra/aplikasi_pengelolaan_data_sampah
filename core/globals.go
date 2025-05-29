@@ -16,6 +16,6 @@ type Waste struct {
 var (
 	WasteData       []Waste            // Slice untuk menyimpan data sampah
 	TriggerShowData bool    = true     // Trigger untuk menggunakan PressToContinue dan ClearConsole di fungsi ReadWaste
-	Version         string  = "v2.1.1" // Versi aplikasi
+	Version         string  = "v2.2.2" // Versi aplikasi
 	SwitchLanguage  bool    = false    // Trigger untuk menggunakan bahasa Inggris
 )

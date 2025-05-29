@@ -14,12 +14,13 @@ import (
 )
 
 type TrashServices struct {
+	// Mutex untuk mengontrol akses ke file
 	mu   sync.Mutex
 	file string
 }
 
 func NewTrashServices() *TrashServices {
-	// Gunakan FormatingSaveData untuk membuat nama file
+	// FormatingSaveData untuk membuat nama file
 	filename := utils.FormatingSaveData()
 
 	return &TrashServices{
@@ -28,10 +29,10 @@ func NewTrashServices() *TrashServices {
 }
 
 func (s *TrashServices) CreateWaste(newWaste core.Waste) error {
+	var wasteData []core.Waste
+	
 	s.mu.Lock()
 	defer s.mu.Unlock()
-
-	var wasteData []core.Waste
 
 	fileContent, err := os.ReadFile(s.file)
 	if err != nil && !errors.Is(err, os.ErrNotExist) {
@@ -62,11 +63,11 @@ func (s *TrashServices) CreateWaste(newWaste core.Waste) error {
 
 func (s *TrashServices) GetAllWaste() ([]core.Waste, error) {
 	var dataFolder string = "../data/"
+    var allWaste []core.Waste
 
     s.mu.Lock()
     defer s.mu.Unlock()
 
-    var allWaste []core.Waste
 
     files, err := os.ReadDir(dataFolder)
     if err != nil {
@@ -110,7 +111,7 @@ func (s *TrashServices) GetWasteByDate(date string) ([]core.Waste, error) {
     s.mu.Lock()
     defer s.mu.Unlock()
 
-    // Siapkan nama file berdasarkan input tanggal
+    // Nama file berdasarkan input tanggal
     filename := dataFolder + date + ".json"
     filename = utils.EnsureJSONExtension(filename)
 
@@ -126,10 +127,122 @@ func (s *TrashServices) GetWasteByDate(date string) ([]core.Waste, error) {
     return allWaste, nil
 }
 
-func (s *TrashServices) UpdateWaste(waste core.Waste) error {
-	return nil
+func (s *TrashServices) UpdateWasteById(id string, updatedWaste core.Waste) (*core.Waste, error) {
+    var dataFolder = "../data/"
+
+    s.mu.Lock()
+    defer s.mu.Unlock()
+
+    files, err := os.ReadDir(dataFolder)
+    if err != nil {
+        return nil, fmt.Errorf("failed to read data directory: %w", err)
+    }
+
+    for i := 0; i < len(files); i++ {
+        file := files[i]
+        if file.IsDir() || !strings.HasSuffix(file.Name(), ".json") {
+            continue
+        }
+
+        filePath := filepath.Join(dataFolder, file.Name())
+        fileContent, err := os.ReadFile(filePath)
+        if err != nil {
+            return nil, fmt.Errorf("failed to read file %s: %w", filePath, err)
+        }
+
+        var wasteList []core.Waste
+        if err := json.Unmarshal(fileContent, &wasteList); err != nil {
+            return nil, fmt.Errorf("failed to unmarshal file %s: %w", filePath, err)
+        }
+
+        for j := 0; j < len(wasteList); j++ {
+            if wasteList[j].ID == id {
+                // Update fields hanya jika tidak kosong
+                if updatedWaste.WasteType != "" {
+                    wasteList[j].WasteType = updatedWaste.WasteType
+                }
+                if updatedWaste.RecyclingMethod != "" {
+                    wasteList[j].RecyclingMethod = updatedWaste.RecyclingMethod
+                }
+                if updatedWaste.Quantity != 0 {
+                    wasteList[j].Quantity = updatedWaste.Quantity
+                }
+                if updatedWaste.Location != "" {
+                    wasteList[j].Location = updatedWaste.Location
+                }
+                if updatedWaste.Status != "" {
+                    wasteList[j].Status = updatedWaste.Status
+                }
+                wasteList[j].UpdatedAt = time.Now().Format("02-01-2006 15:04:05")
+
+                // Simpan file
+                newContent, _ := json.MarshalIndent(wasteList, "", "  ")
+                err := os.WriteFile(filePath, newContent, 0644)
+                if err != nil {
+                    return nil, fmt.Errorf("failed to update file %s: %w", filePath, err)
+                }
+
+                return &wasteList[j], nil
+            }
+        }
+    }
+
+    return nil, fmt.Errorf("waste data with ID %s not found", id)
 }
 
-func (s *TrashServices) DeleteWaste(id string) error {
-	return nil
+func (s *TrashServices) DeleteWasteById(id string) error {
+    var dataFolder = "../data/"
+	
+    s.mu.Lock()
+    defer s.mu.Unlock()
+
+    files, err := os.ReadDir(dataFolder)
+    if err != nil {
+        return fmt.Errorf("failed to read data directory: %w", err)
+    }
+
+    found := false
+
+    for i := 0; i < len(files); i++ {
+        file := files[i]
+        if file.IsDir() || !strings.HasSuffix(file.Name(), ".json") {
+            continue
+        }
+
+        filePath := filepath.Join(dataFolder, file.Name())
+        fileContent, err := os.ReadFile(filePath)
+        if err != nil {
+            return fmt.Errorf("failed to read file %s: %w", filePath, err)
+        }
+
+        var wasteList []core.Waste
+        if err := json.Unmarshal(fileContent, &wasteList); err != nil {
+            return fmt.Errorf("failed to unmarshal file %s: %w", filePath, err)
+        }
+
+        var newWasteList []core.Waste
+        for j := 0; j < len(wasteList); j++ {
+            if wasteList[j].ID != id {
+                newWasteList = append(newWasteList, wasteList[j])
+            } else {
+                found = true
+            }
+        }
+
+        if found {
+            // Update file JSON
+            newContent, _ := json.MarshalIndent(newWasteList, "", "  ")
+            err := os.WriteFile(filePath, newContent, 0644)
+            if err != nil {
+                return fmt.Errorf("failed to update file %s: %w", filePath, err)
+            }
+            return nil
+        }
+    }
+
+    if !found {
+        return fmt.Errorf("waste data with ID %s not found", id)
+    }
+
+    return nil
 }
