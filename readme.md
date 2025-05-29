@@ -98,8 +98,8 @@ trash-app
 │   └── gui.main.go  
 ├── utils/
 │   ├── console.go
-│   ├── uuidv4.go
-|   └── stringutil.go   
+│   ├── logcolors.go
+│   └── stringutil.go
 └── go.mod
 ```
 
