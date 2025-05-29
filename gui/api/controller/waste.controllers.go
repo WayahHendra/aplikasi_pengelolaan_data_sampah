@@ -41,7 +41,7 @@ func (c *TrashControllers) CreateWaste(w http.ResponseWriter, r *http.Request) {
 
 		json.NewEncoder(w).Encode(map[string]string{
 			"status":  "warning",
-			"message": "Invalid JSON format",
+			"message": err.Error(),
 		})
 
 		return
@@ -54,7 +54,7 @@ func (c *TrashControllers) CreateWaste(w http.ResponseWriter, r *http.Request) {
 
 		json.NewEncoder(w).Encode(map[string]string{
 			"status":  "error",
-			"message": "Method not allowed",
+			"message": err.Error(),
 		})
 
 		return
@@ -63,10 +63,12 @@ func (c *TrashControllers) CreateWaste(w http.ResponseWriter, r *http.Request) {
 	log.Print(logger.Types["success"], "Trash data added successfully on /waste request")
 	w.WriteHeader(http.StatusCreated)
 
-	json.NewEncoder(w).Encode(map[string]string{
+	response := map[string]interface{}{
 		"status":  "success",
 		"message": "Trash data added successfully",
-	})
+	}
+
+	json.NewEncoder(w).Encode(response)
 
 	w.Header().Set("Content-Type", "application/json")
 }
@@ -91,7 +93,7 @@ func (c *TrashControllers) GetAllWaste(w http.ResponseWriter, r *http.Request) {
 
 		json.NewEncoder(w).Encode(map[string]string{
 			"status":  "error",
-			"message": "Method not allowed",
+			"message": err.Error(),
 		})
 
 		return
@@ -102,7 +104,7 @@ func (c *TrashControllers) GetAllWaste(w http.ResponseWriter, r *http.Request) {
 
 	response := map[string]interface{}{
 		"status":  "success",
-		"message": "Trash data retrieved successfully on /waste/get/all request",
+		"message": "Trash data retrieved successfully",
 		"data":    wasteData,
 	}
 
@@ -134,7 +136,7 @@ func (c *TrashControllers) GetWasteByDate(w http.ResponseWriter, r *http.Request
 
 		json.NewEncoder(w).Encode(map[string]string{
 			"status":  "warning",
-			"message": "Invalid format date",
+			"message": "Invalid format date or data with date does not exist",
 		})
 
 		return
@@ -147,7 +149,7 @@ func (c *TrashControllers) GetWasteByDate(w http.ResponseWriter, r *http.Request
 
 		json.NewEncoder(w).Encode(map[string]string{
 			"status":  "error",
-			"message": "Method not allowed",
+			"message": err.Error(),
 		})
 		
 		return
@@ -158,7 +160,7 @@ func (c *TrashControllers) GetWasteByDate(w http.ResponseWriter, r *http.Request
 
 	response := map[string]interface{}{
 		"status":  "success",
-		"message": "Trash data retrieved successfully on /waste/get/"+ date +" request",
+		"message": "Trash data with date ("+ date +") retrieved successfully",
 		"data":    wasteData,
 	}
 
@@ -167,6 +169,127 @@ func (c *TrashControllers) GetWasteByDate(w http.ResponseWriter, r *http.Request
 	w.Header().Set("Content-Type", "application/json")
 }
 
-func (c *TrashControllers) UpdateWaste(w http.ResponseWriter, r *http.Request) {}
+func (c *TrashControllers) UpdateWasteById(w http.ResponseWriter, r *http.Request) {
+	path := r.URL.Path
+	parts := strings.Split(path, "/")
+	id := parts[3]
+	
+	if r.Method != http.MethodPut {
+		log.Print(logger.Types["error"], "Method not allowed on /waste/update/"+ id +" request")
+		w.WriteHeader(http.StatusMethodNotAllowed)
 
-func (c *TrashControllers) DeleteWaste(w http.ResponseWriter, r *http.Request) {}
+		json.NewEncoder(w).Encode(map[string]string{
+			"status":  "error",
+			"message": "Method not allowed",
+		})
+
+		return
+	}	
+
+	var updatedWaste core.Waste
+	err := json.NewDecoder(r.Body).Decode(&updatedWaste)
+	if err != nil {
+		log.Print(logger.Types["warning"], "Invalid JSON format on /waste/update/"+ id +" request")
+		w.WriteHeader(http.StatusBadRequest)
+
+		json.NewEncoder(w).Encode(map[string]string{
+			"status":  "warning",
+			"message": err.Error(),
+		})
+
+		return
+	}
+
+	if len(parts) < 4 {
+		log.Print(logger.Types["warning"], "Invalid id or data with id does not exist on /waste/update/"+ id +" request")
+		w.WriteHeader(http.StatusBadRequest)
+
+		json.NewEncoder(w).Encode(map[string]string{
+			"status":  "warning",
+			"message": "Invalid id or data with id does not exist",
+		})
+
+		return
+	}
+
+	wasteData, err := c.service.UpdateWasteById(id, updatedWaste)
+	if err != nil {
+		log.Print(logger.Types["error"], err.Error() + " on /waste/update/"+ id +" request")
+		w.WriteHeader(http.StatusInternalServerError)
+
+		json.NewEncoder(w).Encode(map[string]string{
+			"status":  "error",
+			"message": err.Error(),
+		})
+
+		return
+	}
+
+	log.Print(logger.Types["success"], "Trash data successfully updated on /waste/update/"+ id +" request")
+	w.WriteHeader(http.StatusOK)
+
+	response := map[string]interface{}{
+		"status":  "success",
+		"message": "Trash data with id ("+ id +") successfully updated",
+		"data":    wasteData,
+	}
+
+	json.NewEncoder(w).Encode(response)
+
+	w.Header().Set("Content-Type", "application/json")
+}
+
+func (c *TrashControllers) DeleteWasteById(w http.ResponseWriter, r *http.Request) {
+	path := r.URL.Path
+	parts := strings.Split(path, "/")
+	id := parts[3]
+
+	if r.Method != http.MethodDelete {
+		log.Print(logger.Types["error"], "Method not allowed on /waste/delete/"+ id +" request")
+		w.WriteHeader(http.StatusMethodNotAllowed)
+
+		json.NewEncoder(w).Encode(map[string]string{
+			"status":  "error",
+			"message": "Method not allowed",
+		})
+
+		return
+	}	
+
+	if len(parts) < 4 {
+		log.Print(logger.Types["warning"], "Invalid id or data with id does not exist on /waste/delete/"+ id +" request")
+		w.WriteHeader(http.StatusBadRequest)
+
+		json.NewEncoder(w).Encode(map[string]string{
+			"status":  "warning",
+			"message": "Invalid id or data with id does not exist",
+		})
+
+		return
+	}
+
+	err := c.service.DeleteWasteById(id)
+    if err != nil {
+        log.Print(logger.Types["error"], err.Error()+" on /waste/delete/"+ id +" request")
+        w.WriteHeader(http.StatusInternalServerError)
+
+        json.NewEncoder(w).Encode(map[string]string{
+            "status":  "error",
+            "message": err.Error(),
+        })
+
+        return
+    }
+
+	log.Print(logger.Types["success"], "Trash data successfully deleted on /waste/update/"+ id +" request")
+	w.WriteHeader(http.StatusOK)
+
+	response := map[string]interface{}{
+		"status":  "success",
+		"message": "Trash data with id ("+ id +") successfully deleted",
+	}
+
+	json.NewEncoder(w).Encode(response)
+
+	w.Header().Set("Content-Type", "application/json")
+}
