@@ -98,7 +98,8 @@ trash-app
 │   └── gui.main.go  
 ├── utils/
 │   ├── console.go
-│   └── stringutil.go
+│   ├── uuidv4.go
+|   └── stringutil.go   
 └── go.mod
 ```
 
