@@ -1,78 +1,73 @@
-# Aplikasi Daur Ulang Sampah
+# Aplikasi Pengelolaan Data Sampah dan Daur Ulang
 
-## Overview
-Trash App adalah aplikasi berbasis CLI dan GUI yang dirancang untuk membantu pengelolaan data sampah, termasuk menambah, membaca, mengubah, menghapus, mencari, mengurutkan, mengganti bahasa, dan menyimpan data sampah. Aplikasi ini bertujuan untuk meningkatkan kesadaran akan pengelolaan sampah yang lebih baik.
+## Deskripsi
+Aplikasi ini dirancang untuk mencatat dan mengelola data pengelolaan sampah serta proses daur ulang di suatu wilayah. Dengan fitur yang lengkap, aplikasi ini dapat digunakan oleh petugas pengelolaan sampah atau masyarakat yang ingin mencatat kontribusi mereka dalam daur ulang. Data utama yang dikelola meliputi jenis sampah, jumlah sampah yang dikumpulkan, dan metode daur ulang yang digunakan.
 
-## Features
-- **GUI Placeholder**: GUI belum diimplementasikan, sedang dalam tahap pengembangan!.
-- **CLI Menu**: Menyediakan berbagai fitur seperti CRUD, pencarian, pengurutan, dan lainnya.
-- **Pengelolaan Data Sampah**: Mendukung berbagai jenis sampah dan metode daur ulang.
-- **Pemilihan Bahasa**: Pengguna dapat mengganti ke bahasa Inggris maupun bahasa Indonesia.
-- **Penyimpanan dan Pemulihan Data**: Data dapat disimpan ke file JSON dan dimuat kembali.
+## Fitur Utama
+1. **CRUD Data Sampah**:
+   - Tambah, ubah, dan hapus data jenis sampah serta jumlah sampah yang dikumpulkan.
+2. **Pencatatan Daur Ulang**:
+   - Catat metode daur ulang yang digunakan untuk setiap jenis sampah.
+3. **Pencarian Data**:
+   - Cari data sampah berdasarkan jenis menggunakan Sequential dan Binary Search.
+4. **Pengurutan Data**:
+   - Urutkan data sampah berdasarkan jumlah atau jenis menggunakan Selection dan Insertion Sort.
+5. **Statistik**:
+   - Tampilkan statistik jumlah sampah yang dikumpulkan dan jumlah yang berhasil didaur ulang.
+6. **Dukungan Bahasa**:
+   - Aplikasi mendukung Bahasa Indonesia dan Bahasa Inggris.
 
-## Installation
+## Spesifikasi Teknis
+- **Bahasa Pemrograman**: Go
+- **Format Data**: JSON
+- **Mode Operasi**: CLI (Command Line Interface) dan GUI (Graphical User Interface - dalam pengembangan)
+
+## Cara Instalasi
 1. Clone repositori ini:
    ```bash
    git clone https://github.com/WayahHendra/aplikasi_pengelolaan_data_sampah.git
    ```
-
-## Running
-1. Masuk ke direktori proyek:
+2. Masuk ke direktori proyek:
    ```bash
    cd aplikasi_pengelolaan_data_sampah/cmd
    ```
-
-2. Jalankan aplikasi dengan salah satu perintah berikut:
+3. Jalankan aplikasi:
    ```bash
    go run main.go
    ```
-   atau
-   ```bash
-   go run .
-   ```
 
-3. Ikuti petunjuk di terminal untuk memilih mode dan menggunakan aplikasi.
+## Cara Penggunaan
+### Mode CLI
+Setelah aplikasi dijalankan, pengguna dapat memilih menu berikut:
+1. Tambah data sampah
+2. Tampilkan data sampah
+3. Ubah data sampah
+4. Hapus data sampah
+5. Cari data sampah
+6. Urutkan data sampah
+7. Tampilkan statistik
+8. Muat semua data
+9. Muat data berdasarkan tanggal
+10. Ganti bahasa
+11. Keluar dari aplikasi
 
-## Usage
-Saat menjalankan aplikasi, Anda akan diminta untuk memilih bahasa dan mode:
-1. Bahasa Indonesia / Bahasa Inggris
-2. Mode GUI / Mode CLI
+### Mode GUI
+Mode GUI sedang dalam tahap pengembangan dan akan tersedia di versi mendatang.
 
-### GUI Menu
-GUI dalam tahap pengembangan!
-
-### CLI Menu
-Berikut adalah daftar menu yang tersedia di mode CLI:
-1. Tambah data
-2. Tampilkan semua data
-3. Ubah data
-4. Hapus data
-5. Cari data -> Not Implemented yet!
-6. Urutkan data
-7. Catat proses daur ulang -> Not Implemented yet!
-8. Tampilkan statistik -> Not Implemented yet!
-9. Simpan data -> Bug
-10. Muat data -> Bug
-11. Ganti bahasa
-12. Keluar program
-
-## Project Structure
+## Struktur Proyek
 ```
 trash-app
 ├── cli/
 │   ├── cli-logic/
 │   │   ├── create.go
 │   │   ├── delete.go
-│   │   ├── exitprogram.go
-│   │   ├── load.go
-│   │   ├── read.go
-│   │   ├── record.go
-│   │   ├── save.go
+│   │   ├── update.go
 │   │   ├── search.go
 │   │   ├── sort.go
 │   │   ├── statistics.go
-│   │   ├── switchlanguage.go
-│   │   └── update.go
+│   │   ├── load.go
+│   │   ├── save.go
+│   │   └── switchlanguage.go
 │   └── cli-menus/
 │       ├── menu.go
 │       └── selection.go
@@ -81,30 +76,35 @@ trash-app
 ├── core/
 │   ├── crud.go
 │   ├── globals.go
-│   ├── search.go
 │   ├── shared.go
-│   ├── sort.go
-│   └── storage.go
+│   ├── storage.go
+│   └── search.go
+├── data/
+│   ├── 29-05-2025.json
+│   └── 30-05-2025.json
 ├── gui/
-│   ├── api/
-│   │   ├── controller/
-│   │   │   └── waste.controllers.go
-│   │   ├── module/
-│   │   │   └── waste.modules.go
-│   │   ├── router/
-│   │   │   └── waste.routers.go
-│   │   └── service/
-│   │       └── waste.services.go
-│   └── gui.main.go  
+│   ├── gui.main.go
+│   └── api/
+│       ├── controller/
+│       ├── module/
+│       ├── router/
+│       └── service/
 ├── utils/
 │   ├── console.go
 │   ├── logcolors.go
-│   └── stringutil.go
-└── go.mod
+│   ├── stringutil.go
+│   └── uuidv4.go
+├── LICENSE
+└── readme.md
 ```
 
-## Contributing
-Kontribusi sangat diterima! Jika Anda memiliki saran atau ingin melaporkan bug, silakan buka issue atau kirim pull request.
+## Kontribusi
+Kami menerima kontribusi dari siapa saja! Jika Anda menemukan bug atau memiliki saran untuk fitur baru, silakan buka issue atau kirim pull request.
 
-## License
-Proyek ini dilisensikan di bawah MIT License - lihat file [LICENSE](LICENSE) untuk detail lebih lanjut.
+## Lisensi
+Proyek ini dilisensikan di bawah MIT License. Lihat file [LICENSE](LICENSE) untuk informasi lebih lanjut.
+
+## Kontak
+Untuk pertanyaan lebih lanjut, silakan hubungi:
+- **Email**: wayahhendrask@gmail.com || yogada017@gmail.com
+- **GitHub**: [WayahHendra](https://github.com/WayahHendra) || [YogaDwiAlvian](https://github.com/AphidZ)
