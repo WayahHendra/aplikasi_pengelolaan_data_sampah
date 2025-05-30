@@ -46,10 +46,11 @@ Setelah aplikasi dijalankan, pengguna dapat memilih menu berikut:
 5. Cari data sampah
 6. Urutkan data sampah
 7. Tampilkan statistik
-8. Muat semua data
-9. Muat data berdasarkan tanggal
-10. Ganti bahasa
-11. Keluar dari aplikasi
+8. Simpan semua data
+9. Muat semua data
+10. Muat data berdasarkan tanggal
+11. Ganti bahasa
+12. Keluar dari aplikasi
 
 ### Mode GUI
 Mode GUI sedang dalam tahap pengembangan dan akan tersedia di versi mendatang.
