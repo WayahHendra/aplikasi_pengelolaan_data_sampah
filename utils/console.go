@@ -9,7 +9,7 @@ import (
 )
 
 // PressToContinue menunggu input dari pengguna sebelum melanjutkan.
-func PressToContinue(text string) {
+func PressToContinue(text ...string) {
 	reader := bufio.NewReader(os.Stdin)
 	reader.ReadString('\n')
 	fmt.Print(text)
