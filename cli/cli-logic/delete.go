@@ -36,7 +36,7 @@ func DeleteWaste() {
 
 	// Tampilkan data sampah
 	core.TriggerShowData = false // Nonaktifkan trigger untuk membersihkan konsol
-	ReadWaste("")                  // Tampilkan data
+	ReadWaste("")                // Tampilkan data
 	core.TriggerShowData = true  // Aktifkan kembali trigger
 
 	if core.SwitchLanguage {

@@ -3,7 +3,7 @@ package routers
 import (
 	"log"
 	"net/http"
-	"trash-app/gui/api/module"
+	modules "trash-app/gui/api/module"
 	logger "trash-app/utils"
 )
 

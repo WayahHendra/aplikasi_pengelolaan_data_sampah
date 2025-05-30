@@ -38,6 +38,18 @@ func SortWaste() {
 	}
 
 	if core.SwitchLanguage {
+		fmt.Println("=========================================")
+		fmt.Println("[-1] Back to main menu [Cancel operation]")
+		fmt.Println("=========================================")
+	} else {
+		fmt.Println("=============================================")
+		fmt.Println("[-1] Kembali ke menu utama [Batalkan operasi]")
+		fmt.Println("=============================================")
+	}
+
+	fmt.Println()
+
+	if core.SwitchLanguage {
 		fmt.Println("Sort data by which column?")
 		fmt.Println("[1] Waste Type")
 		fmt.Println("[2] Recycling Method")
@@ -53,9 +65,24 @@ func SortWaste() {
 		fmt.Print("Masukkan pilihan [1-4]: ")
 	}
 	fmt.Scan(&sortFieldChoice)
+	if sortFieldChoice == "-1" {
+		return // Kembali ke menu utama
+	}
 	core.SetSortField(&sortField, sortFieldChoice) // Tentukan kolom pengurutan
 
 	utils.ClearConsole()
+
+	if core.SwitchLanguage {
+		fmt.Println("=========================================")
+		fmt.Println("[-1] Back to main menu [Cancel operation]")
+		fmt.Println("=========================================")
+	} else {
+		fmt.Println("=============================================")
+		fmt.Println("[-1] Kembali ke menu utama [Batalkan operasi]")
+		fmt.Println("=============================================")
+	}
+
+	fmt.Println()
 
 	if core.SwitchLanguage {
 		fmt.Println("Sort order:")
@@ -69,9 +96,24 @@ func SortWaste() {
 		fmt.Print("Masukkan pilihan [1-2]: ")
 	}
 	fmt.Scan(&sortOrderChoice)
+	if sortOrderChoice == "-1" {
+		return // Kembali ke menu utama
+	}
 	core.SetSortOrder(&sortAscending, sortOrderChoice) // Tentukan urutan pengurutan
 
 	utils.ClearConsole()
+
+	if core.SwitchLanguage {
+		fmt.Println("=========================================")
+		fmt.Println("[-1] Back to main menu [Cancel operation]")
+		fmt.Println("=========================================")
+	} else {
+		fmt.Println("=============================================")
+		fmt.Println("[-1] Kembali ke menu utama [Batalkan operasi]")
+		fmt.Println("=============================================")
+	}
+
+	fmt.Println()
 
 	if core.SwitchLanguage {
 		fmt.Println("Choose sorting algorithm:")
@@ -85,6 +127,9 @@ func SortWaste() {
 		fmt.Print("Masukkan pilihan [1-2]: ")
 	}
 	fmt.Scan(&sortAlgorithmChoice)
+	if sortAlgorithmChoice == "-1" {
+		return // Kembali ke menu utama
+	}
 	core.SortByAlgorithm(sortAlgorithmChoice, sortField, sortAscending) // Jalankan algoritma pengurutan
 
 	utils.ClearConsole()

@@ -54,6 +54,8 @@ func ReadWaste(date string) {
 	}
 	fmt.Println("============================================================================================================")
 
+	fmt.Println()
+
 	// Jika trigger aktif, tunggu input untuk melanjutkan dan bersihkan layar
 	if core.TriggerShowData {
 		if core.SwitchLanguage {
