@@ -43,19 +43,13 @@ func HandleSubSelection(breakLoop *bool) {
 func HandleSelection(value int, breakLoop *bool) {
 	switch value {
 	case 1:
-		logic.LoadWaste(&core.WasteData) // Muat data sampah
-		logic.CreateWaste()              // Tambah data sampah
-		logic.SaveWaste(core.WasteData)  // Simpan data sampah
+		logic.CreateWaste() // Tambah data sampah
 	case 2:
-		HandleSubSelection(breakLoop)
+		HandleSubSelection(breakLoop) // Tampilkan data sampah
 	case 3:
-		logic.LoadWaste(&core.WasteData) // Muat data sampah
-		logic.UpdateWaste()              // Ubah data sampah
-		logic.SaveWaste(core.WasteData)  // Simpan data sampah
+		logic.UpdateWaste() // Ubah data sampah
 	case 4:
-		logic.LoadWaste(&core.WasteData) // Muat data sampah
-		logic.DeleteWaste()              // Hapus data sampah
-		logic.SaveWaste(core.WasteData)  // Simpan data sampah
+		logic.DeleteWaste() // Hapus data sampah
 	case 5:
 		logic.SearchWaste() // Cari data sampah
 	case 6:
@@ -63,10 +57,12 @@ func HandleSelection(value int, breakLoop *bool) {
 	case 7:
 		logic.ShowStatistics() // Tampilkan statistik data sampah
 	case 8:
-		logic.LoadAllWaste(&core.WasteData) // Muat semua data sampah
+		logic.SaveWaste(core.WasteData) // Simpan data sampah
 	case 9:
-		logic.LoadWasteByDate(&core.WasteData) // Muat data sampah berdasarkan tanggal
+		logic.LoadAllWaste(&core.WasteData) // Muat semua data sampah
 	case 10:
+		logic.LoadWasteByDate(&core.WasteData) // Muat data sampah berdasarkan tanggal
+	case 11:
 		logic.SwitchLanguage() // Ganti bahasa
 	case -1:
 		logic.ExitProgram(breakLoop) // Keluar dari program

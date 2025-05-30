@@ -115,6 +115,18 @@ func UpdateWaste() {
 		fmt.Println()
 
 		if core.SwitchLanguage {
+			fmt.Println("=========================================")
+			fmt.Println("[-1] Back to main menu [Cancel operation]")
+			fmt.Println("=========================================")
+		} else {
+			fmt.Println("=============================================")
+			fmt.Println("[-1] Kembali ke menu utama [Batalkan operasi]")
+			fmt.Println("=============================================")
+		}
+
+		fmt.Println()
+
+		if core.SwitchLanguage {
 			fmt.Print("Enter waste type: ")
 		} else {
 			fmt.Print("Masukkan jenis sampah: ")
