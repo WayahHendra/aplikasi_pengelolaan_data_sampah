@@ -3,8 +3,11 @@ package routers
 import (
 	"log"
 	"net/http"
-	modules "trash-app/gui/api/module"
-	logger "trash-app/utils"
+	"strconv"
+	"trash-app/core"
+	"trash-app/gui/api/middleware"
+	"trash-app/gui/api/module"
+	"trash-app/utils"
 )
 
 func NewTrashRouters() {
@@ -18,6 +21,13 @@ func NewTrashRouters() {
 	router.HandleFunc("/waste/update/", trashController.UpdateWasteById)
 	router.HandleFunc("/waste/delete/", trashController.DeleteWasteById)
 
-	log.Print(logger.Types["info"], "Server running on 127.0.0.1 with port 8080")
-	log.Fatal(http.ListenAndServe("127.0.0.1:8080", router))
+	routers := middleware.CORS(middleware.APIKeyAuth(router))
+
+	port, err := utils.FindAvailablePort(core.PRIORITY_PORTS)
+	if err != nil {
+		log.Fatalf(utils.Types["error"] + "Failed to find available port: %v", err)
+	}
+
+	log.Printf(utils.Types["info"] + "Server running on http://127.0.0.1:%d\n", port)
+	http.ListenAndServe("127.0.0.1:" + strconv.Itoa(port), routers)
 }
