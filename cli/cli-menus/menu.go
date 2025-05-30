@@ -25,7 +25,7 @@ func ShowTableMenu() {
 		fmt.Println("|| 10. || Switch language                                  ||")
 		fmt.Println("|| -1. || Exit program                                     ||")
 		fmt.Println("=============================================================")
-		fmt.Print("Select menu [1-11]: ")
+		fmt.Print("Select menu [1-10 or -1]: ")
 	} else {
 		fmt.Println("=============================================================")
 		fmt.Println("||   SELAMAT DATANG DI APLIKASI DAUR ULANG SAMPAH", core.Version, "  ||")
@@ -44,7 +44,7 @@ func ShowTableMenu() {
 		fmt.Println("|| 10. || Ganti bahasa                                     ||")
 		fmt.Println("|| -1. || Keluar program                                   ||")
 		fmt.Println("=============================================================")
-		fmt.Print("Pilih menu [1-11]: ")
+		fmt.Print("Pilih menu [1-10 atau -1]: ")
 	}
 }
 

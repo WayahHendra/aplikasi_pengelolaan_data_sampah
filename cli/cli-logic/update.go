@@ -24,13 +24,15 @@ func UpdateWaste() {
 	)
 
 	core.TriggerShowData = false // Nonaktifkan trigger untuk membersihkan konsol
-	ReadWaste("")                  // Menampilkan tabel data
+	ReadWaste("")                // Menampilkan tabel data
 	core.TriggerShowData = true  // Aktifkan kembali trigger
 
 	// Validasi apakah ada data yang tersedia
 	if len(core.WasteData) == 0 {
 		return // Jika tidak ada data, keluar dari fungsi
 	}
+
+	fmt.Println()
 
 	if core.SwitchLanguage {
 		fmt.Println("=========================================")

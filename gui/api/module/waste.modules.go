@@ -1,8 +1,8 @@
 package modules
 
 import (
-	"trash-app/gui/api/controller"
-	"trash-app/gui/api/service"
+	controllers "trash-app/gui/api/controller"
+	services "trash-app/gui/api/service"
 )
 
 type TrashModules struct {
