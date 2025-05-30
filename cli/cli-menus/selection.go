@@ -18,7 +18,6 @@ func HandleSubSelection(breakLoop *bool) {
 
 	switch subSelection {
 	case 1:
-		logic.LoadAllWaste(&core.WasteData)
 		logic.ReadWaste("") // Tampilkan semua data
 	case 2:
 		var date string = logic.LoadWasteByDate(&core.WasteData)

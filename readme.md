@@ -80,8 +80,7 @@ trash-app
 │   ├── storage.go
 │   └── search.go
 ├── data/
-│   ├── 29-05-2025.json
-│   └── 30-05-2025.json
+│   └── dd-mm-yyyy.json
 ├── gui/
 │   ├── gui.main.go
 │   └── api/
