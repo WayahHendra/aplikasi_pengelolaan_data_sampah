@@ -88,10 +88,14 @@ trash-app
 │       ├── controller/
 │       ├── module/
 │       ├── router/
-│       └── service/
+│       ├── service/
+│       └── middleware/
+│           ├── apikey.middleware.go
+│           └── cors.middleware.go
 ├── utils/
 │   ├── console.go
 │   ├── logcolors.go
+│   ├── port.go 
 │   ├── stringutil.go
 │   └── uuidv4.go
 ├── LICENSE
