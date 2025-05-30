@@ -9,13 +9,13 @@ type Waste struct {
 	Location        string  // Lokasi pengumpulan sampah
 	Status          string  // Status daur ulang (sudah/belum)
 	CreatedAt       string  // Waktu pembuatan data
-	UpdatedAt       string  // Waktu pembaruan data	
+	UpdatedAt       string  // Waktu pembaruan data
 }
 
 // Daftar variabel terkait data sampah
 var (
 	WasteData       []Waste            // Slice untuk menyimpan data sampah
 	TriggerShowData bool    = true     // Trigger untuk menggunakan PressToContinue dan ClearConsole di fungsi ReadWaste
-	Version         string  = "v2.2.2" // Versi aplikasi
+	Version         string  = "v2.2.3" // Versi aplikasi
 	SwitchLanguage  bool    = false    // Trigger untuk menggunakan bahasa Inggris
 )

@@ -54,8 +54,6 @@ func ReadWaste(date string) {
 	}
 	fmt.Println("============================================================================================================")
 
-	fmt.Println()
-
 	// Jika trigger aktif, tunggu input untuk melanjutkan dan bersihkan layar
 	if core.TriggerShowData {
 		if core.SwitchLanguage {
@@ -63,6 +61,7 @@ func ReadWaste(date string) {
 		} else {
 			utils.PressToContinue("Tekan Enter untuk kembali ke menu utama...")
 		}
+
 		utils.ClearConsole()
 	}
 }
