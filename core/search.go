@@ -45,10 +45,12 @@ func BinarySearch(query string, field string) []Waste {
 	SortByAlgorithm("1", field, true) // Gunakan Selection Sort dengan urutan ascending
 
 	// Lakukan Binary Search
-	low, high := 0, len(WasteData)-1
+	var low, high int = 0, len(WasteData) - 1
 	for low <= high {
-		mid := (low + high) / 2
-		var midValue string
+		var (
+			mid      int = (low + high) / 2
+			midValue string
+		)
 		switch field {
 		case "WasteType":
 			midValue = utils.StrToLower(WasteData[mid].WasteType)
@@ -64,45 +66,24 @@ func BinarySearch(query string, field string) []Waste {
 			// Tambahkan elemen yang cocok pada indeks tengah
 			results = append(results, WasteData[mid])
 
-			// Cari elemen yang cocok di kiri dan kanan indeks tengah
-			left, right := mid-1, mid+1
-			for left >= 0 {
-				var leftValue string
-				switch field {
-				case "WasteType":
-					leftValue = utils.StrToLower(WasteData[left].WasteType)
-				case "RecyclingMethod":
-					leftValue = utils.StrToLower(WasteData[left].RecyclingMethod)
-				case "Location":
-					leftValue = utils.StrToLower(WasteData[left].Location)
-				case "Status":
-					leftValue = utils.StrToLower(WasteData[left].Status)
+			// Cari elemen yang cocok di seluruh data
+			for i := 0; i < len(WasteData); i++ {
+				if i != mid { // Hindari duplikasi elemen tengah
+					var value string
+					switch field {
+					case "WasteType":
+						value = utils.StrToLower(WasteData[i].WasteType)
+					case "RecyclingMethod":
+						value = utils.StrToLower(WasteData[i].RecyclingMethod)
+					case "Location":
+						value = utils.StrToLower(WasteData[i].Location)
+					case "Status":
+						value = utils.StrToLower(WasteData[i].Status)
+					}
+					if utils.Contains(value, query) {
+						results = append(results, WasteData[i])
+					}
 				}
-				if utils.Contains(leftValue, query) {
-					results = append(results, WasteData[left])
-				} else {
-					break
-				}
-				left--
-			}
-			for right < len(WasteData) {
-				var rightValue string
-				switch field {
-				case "WasteType":
-					rightValue = utils.StrToLower(WasteData[right].WasteType)
-				case "RecyclingMethod":
-					rightValue = utils.StrToLower(WasteData[right].RecyclingMethod)
-				case "Location":
-					rightValue = utils.StrToLower(WasteData[right].Location)
-				case "Status":
-					rightValue = utils.StrToLower(WasteData[right].Status)
-				}
-				if utils.Contains(rightValue, query) {
-					results = append(results, WasteData[right])
-				} else {
-					break
-				}
-				right++
 			}
 			break
 		} else if query < midValue {
